@@ -1,0 +1,21 @@
+@import './mixins';
+
+.chat-sidebar {
+    @include display-flex (column);
+	background-color: $aside-bg-violet;
+	color: $main-text-white;
+	min-height: 100%;
+	overflow: hidden;
+	position: relative;
+	transition: width 300ms linear;
+	width: 40%;
+
+	@media screen and (max-width: 600px) {
+		width: 100vw;
+	}
+
+	@media screen and (min-width: 601px) and (max-width:800px) {
+		width: 50%;
+	}
+}
+

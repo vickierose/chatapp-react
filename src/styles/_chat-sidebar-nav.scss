@@ -1,0 +1,54 @@
+@import './mixins';
+
+.chat-sidebar-nav {
+    @include display-flex (row);
+	justify-content: space-between;
+	margin: .25rem 0;
+	padding: 0.5rem;
+
+	.arrow-icon {
+	    min-width: 40px;
+	    min-height: 40px;
+	    text-align: center;
+	}
+
+	.arrow-image {        //it's an image of arrow by itself.
+		border-left: 1px solid $icons-white;
+		border-top: 1px solid $icons-white;
+		display: inline-block;
+		height: 10px;
+		transform: rotate(-45deg);
+		transition: transform 200ms linear;
+		width: 10px;
+	}
+
+	.search-field {
+		flex-grow: 1;
+    	margin-left: .8rem;
+    	margin-right: 1rem;
+    	text-align: center;
+	}
+			
+	input {
+		width: 75%;
+	}
+		
+	.sandwich-icon {
+		@extend .arrow-icon;
+		font-size: 1rem;
+		margin-right: .4rem;
+	  	padding-left: 1.5em;
+	  	position: relative;
+		  	
+	 	&::before {
+			border-bottom: 0.125em solid $icons-white;
+			border-top: 0.375em double $icons-white;
+			content: "";
+			height: 0.125em;
+			left: 0;
+			position: absolute;
+			top: 0.25em;
+			width: 1em;
+	  	}
+	}
+}

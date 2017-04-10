@@ -1,0 +1,25 @@
+@import './mixins';
+
+.auth-container {
+        @include display-flex (column);
+        align-items: center;
+     * {
+        display: block;
+    }
+
+    label {
+		margin-top: 1rem;
+	}
+
+	input {
+		border-bottom: 1px solid $input-underline-violet;
+	}
+
+    button {
+		margin: 1rem auto;
+        padding: 0 1rem;
+        &:disabled {
+            background-color: $disabled-button-violet;
+        }
+	}
+}

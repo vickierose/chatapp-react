@@ -1,0 +1,36 @@
+.chat-messages-list {
+    height: calc(100vh - 143px);
+    overflow-y: auto;
+}
+
+.message {
+		@include display-flex (row);
+		font-size: .7rem;
+		margin: 1.75rem;
+
+        color: $main-text-white;
+
+        .photo {
+		    align-self: flex-end;
+
+            margin-right: .5rem;
+	    }
+	}
+
+	.message-text {
+    	border-radius: .25rem;
+   		padding: 1.25rem 2em;
+    	max-width: 50%;
+    	position: relative;	
+
+        background-color: $message-from-bg;
+			}
+
+	.time {
+    	position: absolute;
+    	color: lightgrey;
+    	bottom: -1rem;
+   		font-size: .5rem;
+
+        right: 0;
+    }

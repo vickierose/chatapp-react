@@ -1,0 +1,16 @@
+@import './mixins';
+
+.chat-messages-part {
+    @include display-flex (column);	
+    flex-grow: 1;
+	overflow: auto; 
+	width: 60%;
+
+	@media screen and (max-width: 600px) {
+    	width: 0;
+	}
+	
+	@media screen and (min-width: 601px) and (max-width: 800px) {
+		width: 50%;
+	}
+}

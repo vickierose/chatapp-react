@@ -1,0 +1,54 @@
+@import './mixins';
+
+.chat-sidebar-list {
+    	height: calc(100vh - 130px);
+		overflow-y: auto;
+}
+
+.chat-sidebar-list-item {
+    @include display-flex (row);
+		align-items: center;
+		justify-content: space-between;
+		padding: .5em .5rem;
+		&:hover {
+			background-color: $hover-bg;
+		}
+	}
+	
+	.chat-info {
+		flex-grow: 1;
+		margin: 0 .8rem;
+
+        p {
+		    font-size: .7em;
+		    white-space: nowrap;
+	    }
+
+	    .chat-name {
+		    font-size: .9em;
+		}
+	}
+	
+	.timer {
+		align-self: center;
+		background-color: $timer-bg;
+		border-radius: 15px;
+		font-size: .6em;
+		margin-right: 1rem;
+		min-width: 40px;
+    	padding: .5em .4rem;
+    	text-align: center;
+	}
+
+	.user--active {
+		background-color: $active-bg;
+
+		&:hover {
+			background-color: $active-bg;
+		}
+
+		.timer {
+			background-color: $active-timer-bg-white;
+			color: $active-timer-text-pink;
+		}
+	}

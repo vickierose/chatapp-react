@@ -2,6 +2,7 @@
 
 .chat-sidebar-list {
     	height: calc(100vh - 130px);
+		overflow-x: hidden;
 		overflow-y: auto;
 }
 

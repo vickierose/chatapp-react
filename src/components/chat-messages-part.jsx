@@ -6,7 +6,7 @@ import {CreateNewMessage} from './chat-messages-new-message.jsx';
 export class ChatMessagesPart extends Component {
     render() {
         return (
-            <div className='.chat-messages-part'>
+            <div className='chat-messages-part'>
                 <ChatMessagesList />
                 <CreateNewMessage />
             </div>

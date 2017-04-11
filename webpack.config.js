@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const classNames = require('classnames');
 
 module.exports  = {
     entry: {

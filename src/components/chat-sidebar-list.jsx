@@ -9,13 +9,7 @@ export class ChatSidebarList extends Component {
         this.state = {
             users: USERS,
         }
-        // this.getUserList = this.getUserList.bind(this)
     }
-
-    // getUserList(){
-    //     return USERS;
-    //     // console.log(this.state.users);
-    // }
 
     render() {
         return (
@@ -26,9 +20,5 @@ export class ChatSidebarList extends Component {
                 
            </ul>
         );
-    }
-
-    componentDidMount() {
-        console.log(this.state.users);
     }
 }

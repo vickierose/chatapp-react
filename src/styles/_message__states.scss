@@ -1,0 +1,33 @@
+@import "mixins";
+
+.incoming-message {
+	color: $main-text-white;
+
+	.photo {
+    	margin-right: .5rem;
+	}
+
+	.message-text {
+		background-color: $message-from-bg;
+	}
+	.time {
+		right: 0;
+	}
+}
+
+.outcoming-message {
+	justify-content: flex-end;
+
+	.photo {
+		order: 2;
+		margin-left: .5rem;
+	}
+
+	.message-text {
+		background-color: $my-message-bg;
+	}
+
+	.time {
+		left: 0;
+	}
+}

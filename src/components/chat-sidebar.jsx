@@ -16,7 +16,6 @@ export class ChatSidebar extends Component {
 
     toggleSidebar (){
         this.setState(state => ({isSidebarOpen: !state.isSidebarOpen}));
-        console.log(this.state.isSidebarOpen)
     }
 
     render() {

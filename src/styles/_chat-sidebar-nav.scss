@@ -22,6 +22,10 @@
 		width: 10px;
 	}
 
+	.arrow-image--sidebar-closed {
+		transform: rotate(135deg);
+	}
+
 	.search-field {
 		flex-grow: 1;
     	margin-left: .8rem;

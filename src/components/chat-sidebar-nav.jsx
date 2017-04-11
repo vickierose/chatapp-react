@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const classNames = require('classnames');
 
 export class ChatSidebarNav extends Component {
     constructor(props){
@@ -11,10 +12,15 @@ export class ChatSidebarNav extends Component {
     }
 
     render() {
+        let arrowImageClasses = classNames({
+            'arrow-image': true,
+            'arrow-image--sidebar-closed': !this.props.arrowClosed
+        })
+
         return (
             <header className='chat-sidebar-nav'>
                 <div className='arrow-icon' onClick={this.handleArrowClick}>
-                    <div className='arrow-image'></div>
+                    <div className={arrowImageClasses}></div>
                 </div>
 
                     <form className='search-field'>

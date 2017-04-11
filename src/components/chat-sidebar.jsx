@@ -27,7 +27,8 @@ export class ChatSidebar extends Component {
 
         return (
             <aside className={sidebarClasses}>
-                <ChatSidebarNav sizingSidebar={this.toggleSidebar}/>
+                <ChatSidebarNav sizingSidebar={this.toggleSidebar} 
+                                arrowClosed={this.state.isSidebarOpen}/>
                 <ChatSidebarList />
             </aside>
         );

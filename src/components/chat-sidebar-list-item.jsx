@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 export class ChatSidebarListItem extends Component {
     render() {
         let photoStyle = {
-            backgroundImage: 'url('+ "../mock-data/" + this.props.user.photo + ')',
-            backgroundPosition: this.props.user.position
+            backgroundImage: 'url('+ "../mock-data/" + this.props.chat.photo + ')',
+            backgroundPosition: this.props.chat.position
         }
 
         return (
@@ -12,12 +12,11 @@ export class ChatSidebarListItem extends Component {
                 <div className='photo' style={photoStyle}></div>
                 <div className='chat-info'>
                     <p className='chat-name'>
-                        {this.props.user.username}
-                        {this.props.user.surname}
+                        {this.props.chat.name}
                         </p>
-                    <p>{this.props.user.email}</p>
+                    <p>Hello, darkness my old friend</p>
                 </div>
-                <div className='timer'>10m</div>
+                <div className='timer'>{this.props.chat.createdAt}</div>
             </li>
         );
     }

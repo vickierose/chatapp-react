@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 // import style from './../styles/_main-header.scss';
 
 export class MainHeader extends Component {
     constructor(props){
         super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(e){
-        this.props.changePage(e.target.getAttribute('value'));
     }
 
     render() {
@@ -16,12 +13,12 @@ export class MainHeader extends Component {
             <header className='main-header'>
                 <p className='logo'>ChatterBox</p>
                 <nav>
-                    <ul onClick={this.handleClick}>
-                        <li value="home">Home</li>
-                        <li value="chat">Chat</li>
-                        <li value="login">Login</li>
-                        <li value="register">Register</li>
-                        <li value="profile">Profile</li>
+                    <ul>
+                        <li> <Link to="/">Home</Link></li>
+                        <li><Link to="/chat">Chat</Link></li>
+                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="/register">Register</Link></li>
+                        <li><Link to="profile">Profile</Link></li>
                     </ul>
                 </nav>
             </header>

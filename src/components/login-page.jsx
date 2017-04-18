@@ -3,23 +3,18 @@ import React, { Component } from 'react';
 export class LoginPage extends Component {
     constructor(props){
         super(props);
-        this.signIn = this.signIn.bind(this);
+        this.state = {
+            login: '',
+            password: ''
+        }
+
+        this.logIn = this.logIn.bind(this);
+        this.handleLoginChange = this.handleLoginChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
-    signIn(){
-        // let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
-
-        // let myInit = {
-        //         method: 'post',
-		// 		headers: myHeaders,
-		// 		mode: 'cors',
-		// 		body: JSON.stringify({"username": 'poiu', "pass": 'zxcv'})
-
-        // };
-
-        // fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
-        // // .then((res) => res.json())
-        // .then(console.log('signed up'));
+    logIn(){
+        const socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
 
         let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
 
@@ -27,13 +22,31 @@ export class LoginPage extends Component {
                 method: 'post',
 				headers: myHeaders,
 				mode: 'cors',
-				body: JSON.stringify({"username": 'poiu', "password": 'zxcv'})
+				body: JSON.stringify({
+                    "username": this.state.login,
+                    "password": this.state.password
+                })
 
         };
+        
 
         fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/login', myInit)
         .then((res) => res.json())
-        .then((resObj) => localStorage.setItem('userData', JSON.stringify(resObj)));
+        .then((resObj) => localStorage.setItem('userData', JSON.stringify(resObj)))
+        .then(socket.on('connect', () => {
+            let userData = JSON.parse(localStorage.getItem('userData'));
+            socket.emit('authenticate', { token: userData.token});
+     }));
+    }
+
+    handleLoginChange(e){
+        this.setState(state => ({login: e.target.value}));
+        e.persist();
+    }
+
+    handlePasswordChange(e){
+        this.setState(state => ({password: e.target.value}));
+         e.persist();
     }
 
     render() {
@@ -43,16 +56,20 @@ export class LoginPage extends Component {
                 <div>
                     <label>
                         <input type="text"
+                                value = {this.state.login}
+                                onChange={this.handleLoginChange}
                                 placeholder="Login" 
                                 required />
                     </label>
                     <label>
                         <input type="password"
+                                value={this.state.password}
+                                onChange={this.handlePasswordChange}
                                 placeholder="Password" 
                                 required />
                     </label>
 
-                    <button type="submit" onClick={this.signIn}>Log In</button>
+                    <button type="submit" onClick={this.logIn}>Log In</button>
                     <button id="google-custom-button">Log in with Google</button>
                 </div>
             </div>

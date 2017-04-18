@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 
 export class RegisterPage extends Component {
+    register(){
+     // let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
+
+        // let myInit = {
+        //         method: 'post',
+		// 		headers: myHeaders,
+		// 		mode: 'cors',
+		// 		body: JSON.stringify({"username": 'poiu', "pass": 'zxcv'})
+
+        // };
+
+        // fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
+        // // .then((res) => res.json())
+        // .then(console.log('signed up'));
+    }
+    
     render() {
         return (
            <div className='auth-container'>

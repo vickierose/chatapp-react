@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 
 export class RegisterPage extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+
+        };
+        this.register = this.register.bind(this);
+    }
+
     register(){
-     // let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
+     let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
 
-        // let myInit = {
-        //         method: 'post',
-		// 		headers: myHeaders,
-		// 		mode: 'cors',
-		// 		body: JSON.stringify({"username": 'poiu', "pass": 'zxcv'})
+        let myInit = {
+                method: 'post',
+				headers: myHeaders,
+				mode: 'cors',
+				body: JSON.stringify({"username": 'poiu', "pass": 'zxcv'})
 
-        // };
+        };
 
-        // fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
-        // // .then((res) => res.json())
-        // .then(console.log('signed up'));
+        fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
+        // .then((res) => res.json())
+        .then(console.log('signed up'));
     }
     
     render() {

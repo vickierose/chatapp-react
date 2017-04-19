@@ -4,9 +4,32 @@ export class RegisterPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-
+            newUserLogin: '',
+            newUserEmail: '',
+            newUserPassword: '',
+            passwordConfirm: ''
         };
         this.register = this.register.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleConfirmPassChange = this.handleConfirmPassChange.bind(this);
+    }
+    handleNameChange(e){
+        this.setState(state => ({newUserLogin: e.target.value}));
+        e.persist();
+    }
+    handleEmailChange(e){
+        this.setState(state => ({newUserEmail: e.target.value}));
+        e.persist();
+    }
+    handlePasswordChange(e){
+        this.setState(state => ({newUserPassword: e.target.value}));
+        e.persist();
+    }
+    handleConfirmPassChange(e){
+        this.setState(state => ({passwordConfirm: e.target.value}));
+        e.persist();
     }
 
     register(){
@@ -29,26 +52,34 @@ export class RegisterPage extends Component {
         return (
            <div className='auth-container'>
                <h2>Register</h2>
-                <form>
+                <form onSubmit={this.register}>
                     <label>
                         <input type="text"  
-                                placeholder="Full Name" />
+                                placeholder="Full Name"
+                                value={this.state.newUserLogin}
+                                onChange={this.handleNameChange} />
                     </label>
 
                     <label>
                         <input type="email" 
-                                placeholder="E-mail" />
+                                placeholder="E-mail"
+                                value={this.state.newUserEmail}
+                                onChange={this.handleEmailChange} />
                     </label>
 
                     <div>
                         <label>
                             <input type="password" 
-                                    placeholder="Password" />
+                                    placeholder="Password"
+                                    value={this.state.newUserPassword}
+                                    onChange={this.handlePasswordChange} />
                         </label>
 
                         <label>
                             <input type="password" 
-                                    placeholder="Confirm Password" />
+                                    placeholder="Confirm Password"
+                                    value={this.state.passwordConfirm}
+                                    onChange={this.handleConfirmPassChange} />
                         </label>
                     </div>
 

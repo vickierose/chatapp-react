@@ -39,7 +39,9 @@ export class RegisterPage extends Component {
                 method: 'post',
 				headers: myHeaders,
 				mode: 'cors',
-				body: JSON.stringify({"username": 'poiu', "pass": 'zxcv'})
+				body: JSON.stringify({"username": this.state.newUserLogin, 
+                                      "password": this.state.newUserPassword, 
+                                      "email": this.state.newUserEmail})
 
         };
 

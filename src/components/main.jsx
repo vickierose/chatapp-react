@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+
+import history from '../history';
 
 import {MainHeader} from './main-header.jsx';
 
 import {HomePage} from './home-page.jsx';
-import {LoginPage} from './login-page.jsx';
+import LoginPage from './login-page.jsx';
 import {RegisterPage} from './register-page.jsx';
 import {ChatPage} from './chat-page.jsx';
 import {ProfilePage} from './profile-page.jsx';
+
 
 export class Main extends Component {
     constructor(props){
@@ -18,10 +22,11 @@ export class Main extends Component {
     };
 
     render() {
-        return (
+        return ( 
             <Provider store={this.props.store}>
                 <div>
-                    <BrowserRouter>
+                <ConnectedRouter history = {history}>
+                    {/*<BrowserRouter>*/}
                         <div>
                             <Route path="/" component={MainHeader}/>
                             <Route exact path="/" component={HomePage}/>
@@ -30,7 +35,8 @@ export class Main extends Component {
                             <Route path="/chat" component={ChatPage}/>
                             <Route path="/profile" component={ProfilePage}/>
                         </div>
-                    </BrowserRouter>
+                    {/*</BrowserRouter>*/}
+                </ConnectedRouter>
                 </div>
             </Provider>
         );

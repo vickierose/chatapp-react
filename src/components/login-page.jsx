@@ -1,45 +1,51 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export class LoginPage extends Component {
+import Login from './login-page-present'
+
+import * as loginActions from '../actions/login';
+
+class LoginPage extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            login: '',
-            password: ''
-        }
+        // this.state = {
+        //     login: '',
+        //     password: ''
+        // }
 
-        this.logIn = this.logIn.bind(this);
-        this.handleLoginChange = this.handleLoginChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        // this.logIn = this.logIn.bind(this);
+        // this.handleLoginChange = this.handleLoginChange.bind(this);
+        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
-    logIn(){
-        const socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
+    // logIn(){
+    //     const socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
 
-        let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
+    //     let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
 
-        let myInit = {
-                method: 'post',
-				headers: myHeaders,
-				mode: 'cors',
-				body: JSON.stringify({
-                    "username": this.state.login,
-                    "password": this.state.password
-                })
+    //     let myInit = {
+    //             method: 'post',
+	// 			headers: myHeaders,
+	// 			mode: 'cors',
+	// 			body: JSON.stringify({
+    //                 "username": this.state.login,
+    //                 "password": this.state.password
+    //             })
 
-        };
+    //     };
         
 
-        fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/login', myInit)
-        .then((res) => res.json())
-        .then((resObj) => localStorage.setItem('userData', JSON.stringify(resObj)))
-        .then(socket.on('connect', () => {
-            let userData = JSON.parse(localStorage.getItem('userData'));
-            socket.emit('authenticate', { token: userData.token});
-     }));
-    }
+    //     fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/login', myInit)
+    //     .then((res) => res.json())
+    //     .then((resObj) => localStorage.setItem('userData', JSON.stringify(resObj)))
+    //     .then(socket.on('connect', () => {
+    //         let userData = JSON.parse(localStorage.getItem('userData'));
+    //         socket.emit('authenticate', { token: userData.token});
+    //  }));
+    // }
 
-    handleLoginChange(e){
+    /*handleLoginChange(e){
         this.setState(state => ({login: e.target.value}));
         e.persist();
     }
@@ -47,11 +53,11 @@ export class LoginPage extends Component {
     handlePasswordChange(e){
         this.setState(state => ({password: e.target.value}));
          e.persist();
-    }
-
+    }*/
     render() {
         return (
-            <div className='auth-container'>
+            <Login {...this.props}/>)
+            {/*<div className='auth-container'>
                 <h2>Login</h2>
                 <div>
                     <label>
@@ -69,10 +75,15 @@ export class LoginPage extends Component {
                                 required />
                     </label>
 
-                    <button type="submit" onClick={this.logIn}>Log In</button>
+                    <button type="submit" onClick={loginActions.loginUser}>Log In</button>
                     <button id="google-custom-button">Log in with Google</button>
                 </div>
-            </div>
-        );
+            </div>*/}
+        // );
     }
 }
+
+const mapStateToProps = ({login}) => ({login});
+const mapActionsToProps = dispatch => bindActionCreators(loginActions, dispatch);
+
+export default connect(mapStateToProps, mapActionsToProps)(LoginPage);

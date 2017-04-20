@@ -1,6 +1,6 @@
 const initialStore = {
-  chat: [],
-  login: {},
+  // chat: [],
+  login: {}
 };
 
 export default initialStore;

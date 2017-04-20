@@ -5,5 +5,10 @@ import style from './main.scss';
 
 import { Main } from './components/main.jsx';
 
-render(<Main />,
+import configureStore from './store';
+import initialStore from './store/initial-store';
+
+const store = configureStore(initialStore);
+
+render(<Main store={store}/>,
 document.getElementById('root'));

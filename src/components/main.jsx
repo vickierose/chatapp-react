@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import {MainHeader} from './main-header.jsx';
 
@@ -18,18 +19,20 @@ export class Main extends Component {
 
     render() {
         return (
-            <div>
-                <BrowserRouter>
-                    <div>
-                        <Route path="/" component={MainHeader}/>
-                        <Route exact path="/" component={HomePage}/>
-                        <Route path="/register" component={RegisterPage}/>
-                        <Route path="/login" component={LoginPage}/>
-                        <Route path="/chat" component={ChatPage}/>
-                        <Route path="/profile" component={ProfilePage}/>
-                    </div>
-                </BrowserRouter>
-            </div>
+            <Provider store={this.props.store}>
+                <div>
+                    <BrowserRouter>
+                        <div>
+                            <Route path="/" component={MainHeader}/>
+                            <Route exact path="/" component={HomePage}/>
+                            <Route path="/register" component={RegisterPage}/>
+                            <Route path="/login" component={LoginPage}/>
+                            <Route path="/chat" component={ChatPage}/>
+                            <Route path="/profile" component={ProfilePage}/>
+                        </div>
+                    </BrowserRouter>
+                </div>
+            </Provider>
         );
     }
 }

@@ -20,7 +20,7 @@ class LoginPage extends Component {
     }
 
     // logIn(){
-    //     const socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
+    //     const socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com:8000');
 
     //     let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
 

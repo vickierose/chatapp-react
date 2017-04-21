@@ -8,7 +8,7 @@ import { Main } from './components/main.jsx';
 import configureStore from './store';
 import initialStore from './store/initial-store';
 
-const store = configureStore(initialStore);
+export const store = configureStore(initialStore);
 
 render(<Main store={store}/>,
 document.getElementById('root'));

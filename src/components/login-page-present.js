@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {store} from '../app';
 
 class Login extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
-            login: '',
+            username: '',
             password: ''
         }
+    this.logIn = this.logIn.bind(this);
     this.handleLoginChange = this.handleLoginChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
+  logIn(){
+      debugger;
+    const {username, password} = this.state;
+    const login = this.props.loginUser;
+
+    login({username, password})
+    .then(() =>{localStorage.setItem('token', store.getState().login.token)});
+  }
+
  handleLoginChange(e){
-        this.setState(state => ({login: e.target.value}));
+        this.setState(state => ({username: e.target.value}));
         e.persist();
     }
 
@@ -29,7 +40,7 @@ class Login extends Component {
                 <div>
                     <label>
                         <input type="text"
-                                value = {this.state.login}
+                                value = {this.state.username}
                                 onChange={this.handleLoginChange}
                                 placeholder="Login" 
                                 required />
@@ -42,7 +53,7 @@ class Login extends Component {
                                 required />
                     </label>
 
-                    <button type="submit" onClick={this.props.loginUser}>Log In</button>
+                    <button type="submit" onClick={this.logIn}>Log In</button>
                     <button id="google-custom-button">Log in with Google</button>
                 </div>
             </div>

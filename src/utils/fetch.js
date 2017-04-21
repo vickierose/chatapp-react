@@ -6,7 +6,7 @@ export {
    return fetch(new Request(url, {
      method: 'POST',
      headers: {'Content-type': 'application/json'},
-     credentials: 'include',
+     mode: 'cors',
      body: JSON.stringify(data)
    }));
  }

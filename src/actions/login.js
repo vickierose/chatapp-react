@@ -6,11 +6,10 @@ export {
   logoutUser
 };
 
-function loginUser() {
-  const credentials = {"username":"poiu","pass":"zxcv"};
-
+function loginUser(credentials) {
+ 
   return dispatch => {
-     return post('https://front-camp-chat.herokuapp.com/login', credentials).then(response => {
+     return post('http://eleksfrontendcamp-mockapitron.rhcloud.com/login', credentials).then(response => {
        return response.json()
        .then(user => {
          return dispatch({

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as ws from '../utils/ws';
 
 export class CreateNewMessage extends Component {
     constructor(props){
@@ -8,6 +7,7 @@ export class CreateNewMessage extends Component {
             message: ''
         }
         this.handleMessageChange = this.handleMessageChange.bind(this);
+        this.submitMessage = this.submitMessage.bind(this);
     }
 
     handleMessageChange(e){
@@ -20,19 +20,18 @@ export class CreateNewMessage extends Component {
   }
 
    submitMessage() {
-    // ws.sendMessage(this.state.message);
     this.clearForm();
   }
 
     render() {
         return (
-            <form className='create-new-message-form'>
+            <div className='create-new-message-form'>
                 <textarea value={this.state.message} 
                           placeholder="Type message"
                           onChange={this.handleMessageChange} 
                           required></textarea>
-                <button type="submit">Send</button>
-            </form>
+                <button type="submit" onClick={this.submitMessage}>Send</button>
+            </div>
         );
     }
 }

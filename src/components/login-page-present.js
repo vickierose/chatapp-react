@@ -18,7 +18,6 @@ class Login extends Component {
   }
   
   logIn(){
-      debugger;
     const {username, password} = this.state;
     const login = this.props.loginUser;
     const push = this.props.push;

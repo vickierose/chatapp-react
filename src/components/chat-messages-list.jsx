@@ -7,13 +7,13 @@ export class ChatMessagesList extends Component {
         this.state = {
         }
     }
-    
+   
     render() {
         return (
             <ul className='chat-messages-list'>
-                {/*{this.state.messages.map(message =>(*/}
+                {/*{this.state.messages.map(message =>(
                     <ChatMessage />
-                {/*))} */}
+                ))} */}
             </ul>
         );
     }

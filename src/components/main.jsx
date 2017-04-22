@@ -13,7 +13,6 @@ import {RegisterPage} from './register-page.jsx';
 import {ChatPage} from './chat-page.jsx';
 import {ProfilePage} from './profile-page.jsx';
 
-
 export class Main extends Component {
     constructor(props){
         super(props);
@@ -26,7 +25,6 @@ export class Main extends Component {
             <Provider store={this.props.store}>
                 <div>
                 <ConnectedRouter history = {history}>
-                    {/*<BrowserRouter>*/}
                         <div>
                             <Route path="/" component={MainHeader}/>
                             <Route exact path="/" component={HomePage}/>
@@ -35,7 +33,6 @@ export class Main extends Component {
                             <Route path="/chat" component={ChatPage}/>
                             <Route path="/profile" component={ProfilePage}/>
                         </div>
-                    {/*</BrowserRouter>*/}
                 </ConnectedRouter>
                 </div>
             </Provider>

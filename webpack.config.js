@@ -31,6 +31,9 @@ module.exports  = {
     'react/lib/ReactContext': true,
   },
   devServer: {
+    historyApiFallback: {
+    		index: '/index.html'
+  		},
     contentBase: path.join(__dirname, 'src'),
     port: 4200
   }

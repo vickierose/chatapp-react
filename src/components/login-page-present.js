@@ -14,18 +14,20 @@ class Login extends Component {
     this.logIn = this.logIn.bind(this);
     this.handleLoginChange = this.handleLoginChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
+    this.socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com:8000');
   }
   
   logIn(){
       debugger;
     const {username, password} = this.state;
     const login = this.props.loginUser;
+    const push = this.props.push;
 
     login({username, password})
     .then(() =>{localStorage.setItem('token', store.getState().login.token)})
     .then(this.socket.on('connect', () => {
         this.socket.emit('authenticate', { token: localStorage['token']})}))
+    .then(() => {push('/chat')});
   }
 
  handleLoginChange(e){

@@ -1,5 +1,5 @@
 const initialStore = {
-  // chat: [],
+  chat: [],
   login: {}
 };
 

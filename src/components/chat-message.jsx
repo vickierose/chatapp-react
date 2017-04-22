@@ -6,8 +6,8 @@ export class ChatMessage extends Component {
             <li className='message'>
                 <div className='photo'></div>
                 <div className='message-text'>
-                    <span>{this.props.message.text}</span>
-                    <div className='time'>{this.props.message.sentAt}</div>
+                    <span></span>
+                    <div className='time'></div>
                 </div>
             </li>
         );

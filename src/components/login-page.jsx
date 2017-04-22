@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 
 import Login from './login-page-present'
 
@@ -9,41 +10,7 @@ import * as loginActions from '../actions/login';
 class LoginPage extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     login: '',
-        //     password: ''
-        // }
-
-        // this.logIn = this.logIn.bind(this);
-        // this.handleLoginChange = this.handleLoginChange.bind(this);
-        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
-
-    // logIn(){
-    //     const socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com:8000');
-
-    //     let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
-
-    //     let myInit = {
-    //             method: 'post',
-	// 			headers: myHeaders,
-	// 			mode: 'cors',
-	// 			body: JSON.stringify({
-    //                 "username": this.state.login,
-    //                 "password": this.state.password
-    //             })
-
-    //     };
-        
-
-    //     fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/login', myInit)
-    //     .then((res) => res.json())
-    //     .then((resObj) => localStorage.setItem('userData', JSON.stringify(resObj)))
-    //     .then(socket.on('connect', () => {
-    //         let userData = JSON.parse(localStorage.getItem('userData'));
-    //         socket.emit('authenticate', { token: userData.token});
-    //  }));
-    // }
 
     render() {
         return (
@@ -52,6 +19,7 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = ({login}) => ({login});
-const mapActionsToProps = dispatch => bindActionCreators(loginActions, dispatch);
+const actionCreators = Object.assign({}, loginActions, { push });
+const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(LoginPage);

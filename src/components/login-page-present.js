@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {store} from '../app';
 
+import io from 'socket.io-client';
+
 class Login extends Component {
   constructor(...args) {
     super(...args);
@@ -12,15 +14,18 @@ class Login extends Component {
     this.logIn = this.logIn.bind(this);
     this.handleLoginChange = this.handleLoginChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
   }
-
+  
   logIn(){
       debugger;
     const {username, password} = this.state;
     const login = this.props.loginUser;
 
     login({username, password})
-    .then(() =>{localStorage.setItem('token', store.getState().login.token)});
+    .then(() =>{localStorage.setItem('token', store.getState().login.token)})
+    .then(this.socket.on('connect', () => {
+        this.socket.emit('authenticate', { token: localStorage['token']})}))
   }
 
  handleLoginChange(e){

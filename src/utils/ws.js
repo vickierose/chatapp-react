@@ -10,7 +10,6 @@ let socket;
 const listeners = {};
 
 function initConnection(message) {
-    debugger;
   if (!socket) {
     connect();
   }
@@ -21,7 +20,6 @@ function initConnection(message) {
 }
 
 function connect() {
-    debugger;
   socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com:8000');
   socket.on('connect', () => {
             socket.emit('authenticate', { token: localStorage['token']})

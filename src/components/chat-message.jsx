@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export class ChatMessage extends Component {
+import {store} from '../app.js';
+
+const classNames = require('classnames');
+
+class ChatMessage extends Component {
     render() {
+        let messageClasses = classNames({
+            message: true,
+            'outcoming-message': 
+                this.props.message.user.username === store.getState().login.user.username
+        })
+
         return (
-            <li className='message'>
+            <li className={messageClasses}>
                 <div className='photo'></div>
                 <div className='message-text'>
                     <span>{this.props.message.user.username} >> {this.props.message.msg}</span>
@@ -13,3 +24,5 @@ export class ChatMessage extends Component {
         );
     }
 }
+
+export default connect()(ChatMessage);

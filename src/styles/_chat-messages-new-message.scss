@@ -15,9 +15,12 @@
 	}
 
 	textarea {
-		@extend button;
 		border-radius: 1.5rem;
+		height:  2rem;
 		line-height: .75rem;
+		margin: 1rem;
+		padding: 1em 1rem;
+		vertical-align: middle;
    		width: 70%;
 	}	
 }

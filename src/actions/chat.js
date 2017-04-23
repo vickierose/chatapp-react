@@ -8,7 +8,6 @@ export {
 
 function sendMessage(message) {
   const { msg, user, time } = message;
-  console.log(message);
   return {
     type: SEND_MESSAGE,
     payload: {
@@ -20,7 +19,6 @@ function sendMessage(message) {
 function joinChat(userdata) {
   const msg = 'joined chat';
   const {user, time} = userdata;
-  console.log(user);
   return {
     type: JOIN_CHAT,
     payload: {

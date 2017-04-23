@@ -13,6 +13,8 @@ import {RegisterPage} from './register-page.jsx';
 import {ChatPage} from './chat-page.jsx';
 import {ProfilePage} from './profile-page.jsx';
 
+import Websockets from './websockets';
+
 export class Main extends Component {
     constructor(props){
         super(props);
@@ -34,6 +36,7 @@ export class Main extends Component {
                             <Route path="/profile" component={ProfilePage}/>
                         </div>
                 </ConnectedRouter>
+                <Websockets />
                 </div>
             </Provider>
         );

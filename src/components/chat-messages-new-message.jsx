@@ -1,32 +1,35 @@
 import React, { Component } from 'react';
 
+import * as ws from '../utils/ws';
+
 export class CreateNewMessage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            message: ''
+            msg: ''
         }
         this.handleMessageChange = this.handleMessageChange.bind(this);
         this.submitMessage = this.submitMessage.bind(this);
     }
 
     handleMessageChange(e){
-        this.setState(state => ({message: e.target.value}));
+        this.setState(state => ({msg: e.target.value}));
         e.persist();
     }
 
     clearForm() {
-    this.setState({ message: '' });
-  }
+        this.setState({ msg: '' });
+    }
 
    submitMessage() {
-    this.clearForm();
-  }
+       ws.sendMessage(this.state.msg);
+       this.clearForm();
+    }
 
     render() {
         return (
             <div className='create-new-message-form'>
-                <textarea value={this.state.message} 
+                <textarea value={this.state.msg} 
                           placeholder="Type message"
                           onChange={this.handleMessageChange} 
                           required></textarea>

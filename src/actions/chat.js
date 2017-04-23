@@ -6,31 +6,36 @@ export {
   leaveChat
 };
 
-function sendMessage(msg) {
-  const { message, username } = msg;
-
+function sendMessage(message) {
+  const { msg, user, time } = message;
+  console.log(message);
   return {
     type: SEND_MESSAGE,
     payload: {
-      message: `${username} >> ${message}`
+      message: {msg, user, time}
     }
   };
 }
 
-function joinChat(username) {
+function joinChat(userdata) {
+  const msg = 'joined chat';
+  const {user, time} = userdata;
+  console.log(user);
   return {
     type: JOIN_CHAT,
     payload: {
-      username: `${username} joined to chat`
+      user: {msg, user, time}
     }
   };
 }
 
-function leaveChat(username) {
+function leaveChat(userdata) {
+  const msg = 'leaved chat';
+  const {user, time} = userdata;
   return {
     type: LEAVE_CHAT,
     payload: {
-      username: `${username} left chat`
+      user: {msg, user, time}
     }
   };
 }

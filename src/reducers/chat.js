@@ -5,9 +5,9 @@ export default function (state = [], action){
         case SEND_MESSAGE:
             return [...state, action.payload.message];
         case JOIN_CHAT:
-            return [...state, action.payload.username];
+            return [...state, action.payload.user];
         case LEAVE_CHAT:
-            return [...state, action.payload.username];
+            return [...state, action.payload.user];
         default:
         return state
     }

@@ -7,12 +7,20 @@ export class ChatMessagesList extends Component {
         this.state = {
         }
     }
-   
+    get chat() {
+    const { chat } = this.props;
+    return chat.map(message =>(
+                    <ChatMessage message={message} key={message.time}/>
+                ))
+    // return chat.map((item, index) => <li key={ index }>{ item }</li>) || '';
+  }
+
     render() {
         return (
             <ul className='chat-messages-list'>
-                {/*{this.state.messages.map(message =>(
-                    <ChatMessage />
+                {this.chat}
+                {/*{this.chat.map(message =>(
+                    <ChatMessage message={message} key={message.time}/>
                 ))} */}
             </ul>
         );

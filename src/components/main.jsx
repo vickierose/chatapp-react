@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import history from '../history';
 
-import MainHeader from './main-header.jsx';
+import MainHeaderContainer from './main-header';
 
 import {HomePage} from './home-page.jsx';
 import LoginPage from './login-page.jsx';
@@ -26,9 +26,10 @@ export class Main extends Component {
         return ( 
             <Provider store={this.props.store}>
                 <div>
+                {/*<MainHeaderContainer />*/}
                 <ConnectedRouter history = {history}>
                         <div>
-                            <Route path="/" component={MainHeader}/>
+                            <Route path="/" component={MainHeaderContainer}/>
                             <Route exact path="/" component={HomePage}/>
                             <Route path="/register" component={RegisterPage}/>
                             <Route path="/login" component={LoginPage}/>

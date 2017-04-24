@@ -1,49 +1,25 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 
-import {store} from '../app.js';
+import MainHeader from './main-header-present';
 
-class MainHeader extends Component {
+import * as loginActions from '../actions/login';
+
+class MainHeaderContainer extends Component {
     constructor(props){
         super(props);
-    }
-    
-    loggedInRoutes = (
-        <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/chat">Chat</Link></li>
-            <li><Link to="profile">Profile</Link></li>
-            <li>Logout</li>
-        </ul>    
-    )
-
-    notLoggedInRoutes = (
-        <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
-        </ul>
-    )
-
-    get links(){
-        if (store.getState().login.user){
-            return this.loggedInRoutes
-        }else{
-            return this.notLoggedInRoutes
-        }
     }
 
     render() {
         return (
-            <header className='main-header'>
-                <p className='logo'>ChatterBox</p>
-                <nav>
-                    {this.links}
-                </nav>
-            </header>
+            <MainHeader {...this.props}/>
         );
     }
 }
+const mapStateToProps = ({login}) => ({login});
+const actionCreators = Object.assign({}, loginActions, { push });
+const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
-export default connect()(MainHeader);
+export default connect(mapStateToProps, mapActionsToProps)(MainHeaderContainer);

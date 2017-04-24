@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import history from '../history';
 
-import {MainHeader} from './main-header.jsx';
+import MainHeader from './main-header.jsx';
 
 import {HomePage} from './home-page.jsx';
 import LoginPage from './login-page.jsx';

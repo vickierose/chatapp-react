@@ -11,17 +11,15 @@ class MainHeader extends Component {
     }
 
     logOut(){
-        console.log(this);
-        return;
         const logout = this.props.logoutUser;
         const push = this.props.push;
-        // debugger;
-        // logout();
-        // localStorage.removeItem('token');
-        // this.props.push('/');
+        debugger;
+        logout();
+        localStorage.removeItem('token');
+        this.props.push('/');
     }
     
-    loggedInRoutes = (
+    loggedInRoutes = () => (
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/chat">Chat</Link></li>
@@ -30,7 +28,7 @@ class MainHeader extends Component {
         </ul>    
     )
 
-    notLoggedInRoutes = (
+    notLoggedInRoutes = () => (
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Login</Link></li>
@@ -39,16 +37,11 @@ class MainHeader extends Component {
     )
 
     get links(){
-        // if (store.getState().login.user){
-        //     return this.loggedInRoutes
-        // }else{
-        //     return this.notLoggedInRoutes
-        // }
 
          if (this.props.login.user){
-            return this.loggedInRoutes
+            return this.loggedInRoutes();
         }else{
-            return this.notLoggedInRoutes
+            return this.notLoggedInRoutes();
         }
     }
 

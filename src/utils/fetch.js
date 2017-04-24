@@ -1,6 +1,10 @@
 export {
-   post
+   post,
  };
+
+ export {
+   getRequest,
+ }
  
  function post(url, data) {
    return fetch(new Request(url, {
@@ -9,4 +13,8 @@ export {
      mode: 'cors',
      body: JSON.stringify(data)
    }));
+ }
+
+ function getRequest(url) {
+   return fetch(url) 
  }

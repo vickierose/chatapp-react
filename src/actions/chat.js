@@ -1,9 +1,11 @@
-import {SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT} from '../constants/chat';
+import {SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES} from '../constants/chat';
+import {getRequest} from '../utils/fetch';
 
 export {
   sendMessage,
   joinChat,
-  leaveChat
+  leaveChat,
+  getMessages,
 };
 
 function sendMessage(message) {
@@ -36,4 +38,17 @@ function leaveChat(userdata) {
       user: {msg, user, time}
     }
   };
+}
+
+function getMessages(){
+  return dispatch => getRequest('http://eleksfrontendcamp-mockapitron.rhcloud.com/messages')
+   .then(res => res.json())
+   .then(messages =>{
+     return dispatch({
+       type: GET_MESSAGES,
+       payload: {
+         messages
+       }
+     })
+   })
 }

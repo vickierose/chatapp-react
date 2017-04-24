@@ -20,7 +20,7 @@ function initConnection(message) {
 }
 
 function connect() {
-  socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com:8000');
+  socket = io.connect('http://eleksfrontendcamp-mockapitron.rhcloud.com');
   socket.on('connect', () => {
             socket.emit('authenticate', { token: localStorage['token']})
         });

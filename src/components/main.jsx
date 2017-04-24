@@ -26,7 +26,6 @@ export class Main extends Component {
         return ( 
             <Provider store={this.props.store}>
                 <div>
-                {/*<MainHeaderContainer />*/}
                 <ConnectedRouter history = {history}>
                         <div>
                             <Route path="/" component={MainHeaderContainer}/>

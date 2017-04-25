@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import Login from './login-page-present'
 
 import * as loginActions from '../actions/login';
+import * as chatActions from '../actions/chat';
 
 class LoginPage extends Component {
     constructor(props){
@@ -18,8 +19,8 @@ class LoginPage extends Component {
     }
 }
 
-const mapStateToProps = ({login}) => ({login});
-const actionCreators = Object.assign({}, loginActions, { push });
+const mapStateToProps = ({chat, login}) => ({chat, login});
+const actionCreators = Object.assign({}, loginActions, chatActions, { push });
 const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(LoginPage);

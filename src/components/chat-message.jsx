@@ -7,6 +7,30 @@ const classNames = require('classnames');
 const moment = require('moment');
 
 class ChatMessage extends Component {
+
+    checkMessage(){
+        const msg = this.props.message.msg;
+        if (typeof msg ==='string'){
+            return msg
+        }else if(!msg){
+            return 'message is broken'
+        }else {
+            return msg.msg
+        }
+    }
+
+    formatDate(){
+        const messageDate = this.props.message.time;
+        return moment(messageDate).calendar(null, {
+            sameDay: 'LT',
+            nextDay: 'L',
+            nextWeek: 'L',
+            lastDay: 'L',
+            lastWeek: 'L',
+            sameElse: 'L',
+        })
+        
+    }
     render() {
         let messageClasses = classNames({
             message: true,
@@ -20,8 +44,8 @@ class ChatMessage extends Component {
             <li className={messageClasses}>
                 <div className='photo'></div>
                 <div className='message-text'>
-                    <span>{this.props.message.user.username} >> {this.props.message.msg}</span>
-                    <div className='time'>{messageDate}</div>
+                    <span>{this.props.message.user.username} >> {this.checkMessage()}</span>
+                    <div className='time'>{this.formatDate()}</div>
                 </div>
             </li>
         );

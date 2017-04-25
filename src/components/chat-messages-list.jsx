@@ -14,11 +14,6 @@ export class ChatMessagesList extends Component {
                 ))
   }
 
-//   componentWillMount() {
-//      const getMessages = this.props.getMessages;
-//      getMessages();
-//   }
-
     render() {
         return (
             <ul className='chat-messages-list'>

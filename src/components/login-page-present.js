@@ -20,12 +20,13 @@ class Login extends Component {
     const {username, password} = this.state;
     const login = this.props.loginUser;
     const push = this.props.push;
-
+    const getMessages = this.props.getMessages;
     login({username, password})
     .then(() =>{
         localStorage.setItem('token', store.getState().login.token);
     })
-    .then(() => {push('/chat')});
+    .then(() => {push('/chat')})
+    .then(() =>getMessages());
   }
 
  handleLoginChange(e){

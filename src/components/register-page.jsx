@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export class RegisterPage extends Component {
+class RegisterPage extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -46,15 +49,15 @@ export class RegisterPage extends Component {
         };
 
         fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
-        // .then((res) => res.json())
-        .then(console.log('signed up'));
+        .then(() => { this.props.push('/login')});
+
     }
     
     render() {
         return (
            <div className='auth-container'>
                <h2>Register</h2>
-                <form onSubmit={this.register}>
+                <div onSubmit={this.register}>
                     <label>
                         <input type="text"  
                                 placeholder="Full Name"
@@ -85,9 +88,14 @@ export class RegisterPage extends Component {
                         </label>
                     </div>
 
-                    <button type="submit">Sign Up</button>
-                    </form>
+                    <button type="submit" onClick={this.register}>Sign Up</button>
+                    </div>
                 </div> 
         );
     }
 }
+
+const actionCreators = Object.assign({}, { push });
+const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
+
+export default connect(null, mapActionsToProps)(RegisterPage);

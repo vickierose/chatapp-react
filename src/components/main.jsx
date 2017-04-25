@@ -9,7 +9,7 @@ import MainHeaderContainer from './main-header';
 
 import {HomePage} from './home-page.jsx';
 import LoginPage from './login-page.jsx';
-import {RegisterPage} from './register-page.jsx';
+import RegisterPage from './register-page.jsx';
 import {ChatPage} from './chat-page.jsx';
 import {ProfilePage} from './profile-page.jsx';
 

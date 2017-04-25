@@ -7,6 +7,9 @@ export class ChatMessagesList extends Component {
         this.state = {
         }
     }
+
+//TODO: add scroll to bottom of list
+
     get chat() {
     const { chat } = this.props;
     return chat.map(message =>(

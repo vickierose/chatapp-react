@@ -8,7 +8,14 @@ export class ChatMessagesList extends Component {
         }
     }
 
-//TODO: add scroll to bottom of list
+    scrollToBottom(){
+        const messageList = document.querySelector('.chat-messages-list');
+        messageList.scrollTop += messageList.scrollHeight;
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
 
     get chat() {
     const { chat } = this.props;

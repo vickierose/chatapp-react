@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
+import ChatSidebarSandwichMenu from './chat-sidebar-sandwich-menu';
+
 const classNames = require('classnames');
 
 export class ChatSidebarNav extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            sandwichMenuOpened: false
+        }
         this.handleArrowClick = this.handleArrowClick.bind(this);
+        this.toggleSandwichMenu = this.toggleSandwichMenu.bind(this);
     }
 
     handleArrowClick(e){
+        if(this.props.arrowClosed && this.state.sandwichMenuOpened){
+            this.toggleSandwichMenu()
+        };
+
         this.props.sizingSidebar();
+    }
+
+    toggleSandwichMenu(){
+        this.setState(state => ({sandwichMenuOpened: !this.state.sandwichMenuOpened}))
     }
 
     render() {
@@ -30,7 +44,9 @@ export class ChatSidebarNav extends Component {
                         />
                     </form>
 
-                    <div className='sandwich-icon'></div>
+                    <div className='sandwich-icon' onClick={this.toggleSandwichMenu}></div>
+
+                    <ChatSidebarSandwichMenu displayState={this.state.sandwichMenuOpened} />
             </header>
         );
     }

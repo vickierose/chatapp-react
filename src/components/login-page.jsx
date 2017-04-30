@@ -7,6 +7,7 @@ import Login from './login-page-present'
 
 import * as loginActions from '../actions/login';
 import * as chatActions from '../actions/chat';
+import * as userlistActions from '../actions/userlist';
 
 class LoginPage extends Component {
     constructor(props){
@@ -19,8 +20,8 @@ class LoginPage extends Component {
     }
 }
 
-const mapStateToProps = ({chat, login}) => ({chat, login});
-const actionCreators = Object.assign({}, loginActions, chatActions, { push });
+const mapStateToProps = ({chat, login, userlist}) => ({chat, login, userlist});
+const actionCreators = Object.assign({}, loginActions, chatActions, userlistActions, { push });
 const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(LoginPage);

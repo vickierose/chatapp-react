@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import {ChatSidebarNav} from './chat-sidebar-nav.jsx';
 import {ChatSidebarList} from './chat-sidebar-list.jsx';
 
+import * as userlistActions from '../actions/userlist';
+
 const classNames = require('classnames');
 
-export class ChatSidebar extends Component {
+class ChatSidebar extends Component {
     constructor (props){
         super(props);
         this.state = {
@@ -28,8 +32,12 @@ export class ChatSidebar extends Component {
             <aside className={sidebarClasses}>
                 <ChatSidebarNav sizingSidebar={this.toggleSidebar} 
                                 arrowClosed={this.state.isSidebarOpen}/>
-                <ChatSidebarList />
+                <ChatSidebarList {...this.props} />
             </aside>
         );
     }
 }
+
+const mapStateToProps = ({userlist}) =>({userlist});
+const mapActionsToProps =  dispatch => bindActionCreators(Object.assign({}, userlistActions), dispatch);
+export default connect(mapStateToProps, mapActionsToProps)(ChatSidebar);

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {store} from '../app';
 
-import io from 'socket.io-client';
 
 class Login extends Component {
   constructor(...args) {
@@ -21,11 +20,14 @@ class Login extends Component {
     const login = this.props.loginUser;
     const push = this.props.push;
     const getMessages = this.props.getMessages;
+    const getUsers = this.props.getUsers;
+
     login({username, password})
     .then(() =>{
-        localStorage.setItem('token', store.getState().login.token);
+        localStorage.setItem('userdata', JSON.stringify(store.getState().login));
     })
     .then(() => {push('/chat')})
+    .then(() => getUsers())
     .then(() =>getMessages());
   }
 

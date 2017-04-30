@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import style from './main.scss';
 
-import { Main } from './components/main.jsx';
+import Main from './components/main.jsx';
 
 import configureStore from './store';
 import initialStore from './store/initial-store';

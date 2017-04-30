@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES } from '../constants/chat';
+import { SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES, GET_USERS } from '../constants/chat';
 
 export default function (state = [], action){
     switch (action.type) {

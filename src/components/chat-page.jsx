@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {ChatSidebar} from './chat-sidebar.jsx';
+import ChatSidebar from './chat-sidebar.jsx';
 import ChatMessagesPart from './chat-messages-part.jsx';
 
 

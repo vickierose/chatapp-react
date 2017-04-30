@@ -6,29 +6,20 @@ import {getRequest} from '../utils/fetch';
 export class ChatSidebarList extends Component {
     constructor (props){
         super(props);
-        this.state = {
-            users: []
-        };
-        this.getUsers = this.getUsers.bind(this);
-
+        this.state = {};
     }
 
-    getUsers(){
-        getRequest('http://eleksfrontendcamp-mockapitron.rhcloud.com/users')
-        .then(res => res.json())
-        .then(res => {this.setState(state => ({users: res}))})
-    }
-
-    componentWillMount() {
-        this.getUsers();
+    get userlist(){
+        const { userlist } = this.props;
+        return userlist.map((user, i) =>(
+            <ChatSidebarListItem user={user} key={i}/>
+        ))
     }
 
     render() {
         return (
            <ul className='chat-sidebar-list'>
-               {this.state.users.map((user, i) => (
-                    <ChatSidebarListItem user={user} key={i}/>
-               ))}}  
+               {this.userlist}
            </ul>
         );
     }

@@ -1,9 +1,10 @@
-import { LOGIN, LOGOUT } from '../constants/login';
+import { LOGIN, LOGOUT, LOGIN_WITH_TOKEN } from '../constants/login';
 import { post } from '../utils/fetch';
 
 export {
   loginUser,
-  logoutUser
+  logoutUser,
+  loginWithToken
 };
 
 function loginUser(credentials) {
@@ -28,4 +29,13 @@ function logoutUser() {
   return {
     type: LOGOUT
   };
+}
+
+function loginWithToken(userdata) {
+  return {
+    type: LOGIN_WITH_TOKEN,
+    payload: {
+      user: JSON.parse(userdata)
+    }
+  }
 }

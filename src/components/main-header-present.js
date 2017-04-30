@@ -13,10 +13,11 @@ class MainHeader extends Component {
     logOut(){
         const logout = this.props.logoutUser;
         const push = this.props.push;
-        debugger;
         logout();
-        localStorage.removeItem('token');
+        localStorage.removeItem('userdata');
         this.props.push('/');
+
+        //TODO: clear on logout userlist and messagelist
     }
     
     loggedInRoutes = () => (

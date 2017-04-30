@@ -3,6 +3,11 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import {loginUser} from '../actions/login';
+// import * as chatActions from '../actions/chat';
+import {getMessages} from '../actions/chat';
+import {getUsers} from '../actions/userlist';
+
 class RegisterPage extends Component {
     constructor(props){
         super(props);
@@ -49,8 +54,17 @@ class RegisterPage extends Component {
         };
 
         fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
-        .then(() => { this.props.push('/login')});
-
+        .then(() => 
+            this.props.loginUser({username: this.state.newUserLogin,
+                                password: this.state.newUserPassword})
+        )
+        .then(() =>{
+            localStorage.setItem('userdata', JSON.stringify(this.props.login));
+        })
+        .then(() => {
+            this.props.push('/chat')})
+        .then(() => this.props.getUsers())
+        .then(() =>this.props.getMessages());
     }
 
     componentWillMount() {
@@ -101,8 +115,8 @@ class RegisterPage extends Component {
     }
 }
 
-const mapStateToProps = ({login}) => ({login});
-const actionCreators = Object.assign({}, { push });
+const mapStateToProps = ({login, chat, userlist}) => ({login, chat, userlist});
+const actionCreators = Object.assign({}, {loginUser}, {getMessages}, {getUsers}, { push });
 const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(RegisterPage);

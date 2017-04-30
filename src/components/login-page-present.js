@@ -41,6 +41,12 @@ class Login extends Component {
          e.persist();
     }
 
+    componentWillMount() {
+        if(this.props.login.user){
+            this.props.push('/')
+        }
+    }
+
     render() {
         return (
             <div className='auth-container'>

@@ -13,14 +13,14 @@ import MainHeaderContainer from './main-header';
 import {HomePage} from './home-page.jsx';
 import LoginPage from './login-page.jsx';
 import RegisterPage from './register-page.jsx';
-import {ChatPage} from './chat-page.jsx';
-import {ProfilePage} from './profile-page.jsx';
+import ChatPage from './chat-page.jsx';
+import ProfilePage from './profile-page.jsx';
 
 import Websockets from './websockets';
 
-import * as loginActions from '../actions/login';
+import {loginWithToken} from '../actions/login';
 import * as chatActions from '../actions/chat';
-import * as userlistActions from '../actions/userlist';
+import {getUsers} from '../actions/userlist';
 import * as ws from '../utils/ws';
 
 class Main extends Component {
@@ -66,6 +66,6 @@ class Main extends Component {
 }
 
 const mapStateToProps = ({login}) => ({login});
-const mapActionsToProps = dispatch => bindActionCreators(Object.assign({}, loginActions, chatActions, userlistActions), dispatch);
+const mapActionsToProps = dispatch => bindActionCreators(Object.assign({}, {loginWithToken}, chatActions, {getUsers}), dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(Main)

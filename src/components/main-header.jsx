@@ -5,7 +5,9 @@ import { push } from 'react-router-redux';
 
 import MainHeader from './main-header-present';
 
-import * as loginActions from '../actions/login';
+import {logoutUser} from '../actions/login';
+import {clearUsers} from '../actions/userlist';
+import {clearMessages} from '../actions/chat';
 
 class MainHeaderContainer extends Component {
     constructor(props){
@@ -19,7 +21,7 @@ class MainHeaderContainer extends Component {
     }
 }
 const mapStateToProps = ({login}) => ({login});
-const actionCreators = Object.assign({}, loginActions, { push });
+const actionCreators = Object.assign({}, {logoutUser}, {clearUsers}, {clearMessages}, { push });
 const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(MainHeaderContainer);

@@ -1,8 +1,9 @@
-import {GET_USERS} from '../constants/userlist';
+import {GET_USERS, CLEAR_USERS} from '../constants/userlist';
 import {getRequest} from '../utils/fetch';
 
 export {
     getUsers,
+    clearUsers
 }
 
 function getUsers(){
@@ -16,4 +17,10 @@ function getUsers(){
       }
     })
   })
+}
+
+function clearUsers() {
+  return {
+    type: CLEAR_USERS
+  }
 }

@@ -1,4 +1,4 @@
-import {SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES} from '../constants/chat';
+import {SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES, CLEAR_MESSAGES} from '../constants/chat';
 import {getRequest} from '../utils/fetch';
 
 export {
@@ -6,6 +6,7 @@ export {
   joinChat,
   leaveChat,
   getMessages,
+  clearMessages
 };
 
 function sendMessage(message) {
@@ -51,4 +52,10 @@ function getMessages(){
        }
      })
    })
+}
+
+function clearMessages(){
+  return {
+    type: CLEAR_MESSAGES
+  }
 }

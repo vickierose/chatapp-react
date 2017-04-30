@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES, GET_USERS } from '../constants/chat';
+import { SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES, CLEAR_MESSAGES } from '../constants/chat';
 
 export default function (state = [], action){
     switch (action.type) {
@@ -10,6 +10,8 @@ export default function (state = [], action){
             return [...state, action.payload.user];
         case GET_MESSAGES:
             return [...state, ...action.payload.messages];
+        case CLEAR_MESSAGES:
+            return [];
         default:
         return state
     }

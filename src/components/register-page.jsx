@@ -52,6 +52,12 @@ class RegisterPage extends Component {
         .then(() => { this.props.push('/login')});
 
     }
+
+    componentWillMount() {
+        if(this.props.login.user){
+            this.props.push('/')
+        }
+    }
     
     render() {
         return (
@@ -95,7 +101,8 @@ class RegisterPage extends Component {
     }
 }
 
+const mapStateToProps = ({login}) => ({login});
 const actionCreators = Object.assign({}, { push });
 const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
-export default connect(null, mapActionsToProps)(RegisterPage);
+export default connect(mapStateToProps, mapActionsToProps)(RegisterPage);

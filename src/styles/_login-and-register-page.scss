@@ -23,3 +23,20 @@
         }
 	}
 }
+
+.social-button {
+    border-radius: .75rem;
+    background-color: $buttons-bg-violet;
+    color: $main-text-white;
+    height: 1.5rem;
+    outline: none;
+    margin: 1rem auto;
+    padding: 0 1rem;
+    &:disabled {
+        background-color: $disabled-button-violet;
+     }
+     
+    &:hover {
+        background-color: $hover-bg;
+    }
+}

@@ -7,9 +7,10 @@ export class ChatSidebarNav extends Component {
     constructor(props){
         super(props);
         this.state = {
-            sandwichMenuOpened: false
+            sandwichMenuOpened: false,
         }
         this.handleArrowClick = this.handleArrowClick.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
         this.toggleSandwichMenu = this.toggleSandwichMenu.bind(this);
     }
 
@@ -23,6 +24,11 @@ export class ChatSidebarNav extends Component {
 
     toggleSandwichMenu(){
         this.setState(state => ({sandwichMenuOpened: !this.state.sandwichMenuOpened}))
+    }
+
+    handleSearchChange(e){
+        this.props.handleFilterChange(e.target.value)
+         e.persist();
     }
 
     render() {
@@ -41,6 +47,8 @@ export class ChatSidebarNav extends Component {
                         <input type="text" 
                         placeholder="Search"
                         name="search"
+                        value={this.props.filterValue}
+                        onChange={this.handleSearchChange}
                         />
                     </form>
 

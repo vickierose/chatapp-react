@@ -13,6 +13,10 @@ export class ChatMessagesList extends Component {
         messageList.scrollTop += messageList.scrollHeight;
     }
 
+    componentWillMount() {
+        // this.scrollToBottom();
+    }
+
     componentDidUpdate() {
         this.scrollToBottom();
     }

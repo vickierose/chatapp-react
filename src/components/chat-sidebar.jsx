@@ -13,13 +13,19 @@ class ChatSidebar extends Component {
     constructor (props){
         super(props);
         this.state = {
-            isSidebarOpen: true
+            isSidebarOpen: true,
+            filterValue: ''
         }
         this.toggleSidebar = this.toggleSidebar.bind(this);
+         this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     toggleSidebar (){
         this.setState(state => ({isSidebarOpen: !state.isSidebarOpen}));
+    }
+
+    handleSearchChange(value){
+        this.setState(state => ({filterValue: value}));
     }
 
     render() {
@@ -31,8 +37,10 @@ class ChatSidebar extends Component {
         return (
             <aside className={sidebarClasses}>
                 <ChatSidebarNav sizingSidebar={this.toggleSidebar} 
-                                arrowClosed={this.state.isSidebarOpen}/>
-                <ChatSidebarList {...this.props} />
+                                arrowClosed={this.state.isSidebarOpen}
+                                filterValue={this.state.filterValue}
+                                handleFilterChange={this.handleSearchChange}/>
+                <ChatSidebarList {...this.props} filterValue={this.state.filterValue}/>
             </aside>
         );
     }

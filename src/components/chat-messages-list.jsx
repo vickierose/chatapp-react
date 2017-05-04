@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChatMessage from './chat-message.jsx';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 export class ChatMessagesList extends Component {
     constructor (props){
@@ -9,12 +10,11 @@ export class ChatMessagesList extends Component {
     }
 
     scrollToBottom(){
-        const messageList = document.querySelector('.chat-messages-list');
-        messageList.scrollTop += messageList.scrollHeight;
+        this.refs.scrollbars.scrollToBottom()
     }
 
-    componentWillMount() {
-        // this.scrollToBottom();
+    componentDidMount() {
+        this.scrollToBottom();
     }
 
     componentDidUpdate() {
@@ -30,9 +30,11 @@ export class ChatMessagesList extends Component {
 
     render() {
         return (
-            <ul className='chat-messages-list'>
-                {this.chat}
-            </ul>
+            <Scrollbars style={{height: 'calc(100vh - 143px)'}} ref='scrollbars'>
+                <ul className='chat-messages-list'>
+                    {this.chat}
+                </ul>
+            </Scrollbars>
         );
     }
 }

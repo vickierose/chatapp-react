@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { Scrollbars } from 'react-custom-scrollbars';
 
 import * as ws from '../utils/ws';
 
@@ -29,10 +30,13 @@ export class CreateNewMessage extends Component {
     render() {
         return (
             <div className='create-new-message-form'>
-                <textarea value={this.state.msg} 
-                          placeholder="Type message"
-                          onChange={this.handleMessageChange} 
-                          required></textarea>
+
+                {/*<Scrollbars style={{height:'2rem'}}>*/}
+                    <textarea value={this.state.msg} 
+                            placeholder="Type message"
+                            onChange={this.handleMessageChange} 
+                            required></textarea>
+                {/*</Scrollbars>*/}
                 <button type="submit" onClick={this.submitMessage}>Send</button>
             </div>
         );

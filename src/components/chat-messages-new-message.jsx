@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import TextareaScrollbars from './textarea-scrollbars'
 
 import * as ws from '../utils/ws';
 
@@ -31,12 +30,10 @@ export class CreateNewMessage extends Component {
         return (
             <div className='create-new-message-form'>
 
-                {/*<TextareaScrollbars>*/}
                     <textarea value={this.state.msg} 
                             placeholder="Type message"
                             onChange={this.handleMessageChange} 
                             required></textarea>
-                {/*</TextareaScrollbars>*/}
                 <button type="submit" onClick={this.submitMessage}>Send</button>
             </div>
         );

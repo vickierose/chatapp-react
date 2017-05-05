@@ -1,5 +1,5 @@
 .chat-messages-list {
-    height: calc(100vh - 143px);
+	overflow-x: hidden;
 }
 
 .message {

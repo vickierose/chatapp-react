@@ -40,3 +40,14 @@
         background-color: $hover-bg;
     }
 }
+
+.error {
+        color: $error-text-pink;
+        display: none;
+        font-size: .7rem;
+        margin-top: .5em;
+        text-align: end;
+    }
+ .hidden-error {
+            display: none;
+        }

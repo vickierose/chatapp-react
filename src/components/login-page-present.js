@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {store} from '../app';
 // import * as ws from '../utils/ws';
-
+import * as validation from '../utils/validation';
 import GoogleLogin from 'react-google-login';
- 
+
+ const classNames = require('classnames');
+
 class Login extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
             username: '',
-            password: ''
+            password: '',
+            formIsValid: false
         }
+    this.checkFormValidity = this.checkFormValidity.bind(this);
+    this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.logIn = this.logIn.bind(this);
     this.googleSuccess = this.googleSuccess.bind(this);
     this.googleFail = this.googleFail.bind(this);
-    this.handleLoginChange = this.handleLoginChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+  }
+
+  checkFormValidity(){
+      if(validation.isNotEmpty(this.state.username) && validation.isNotEmpty(this.state.password)){
+          this.setState(({state}) => ({formIsValid: true}))
+      }else{
+          this.setState(({state}) => ({formIsValid: false}))
+      }
   }
   
   logIn(){
@@ -28,7 +38,7 @@ class Login extends Component {
 
     login({username, password})
     .then(() =>{
-        localStorage.setItem('userdata', JSON.stringify(store.getState().login));
+        localStorage.setItem('userdata', JSON.stringify(this.props.login));
     })
     .then(() => {push('/chat')})
     .then(() => getUsers())
@@ -63,13 +73,15 @@ class Login extends Component {
       console.log(err)
   }
 
- handleLoginChange(e){
+  handleLoginChange(e){
         this.setState(state => ({username: e.target.value}));
+        this.checkFormValidity();
         e.persist();
     }
 
     handlePasswordChange(e){
         this.setState(state => ({password: e.target.value}));
+        this.checkFormValidity();
          e.persist();
     }
 
@@ -90,6 +102,8 @@ class Login extends Component {
                                 onChange={this.handleLoginChange}
                                 placeholder="Login" 
                                 required />
+                        <div className='error'>
+                            Login is required</div>
                     </label>
                     <label>
                         <input type="password"
@@ -97,9 +111,12 @@ class Login extends Component {
                                 onChange={this.handlePasswordChange}
                                 placeholder="Password" 
                                 required />
+                        <div className='error'>Password is required</div>
                     </label>
 
-                    <button type="submit" onClick={this.logIn}>Log In</button>
+                    <button type="submit" 
+                            disabled={!this.state.formIsValid}
+                            onClick={this.logIn}>Log In</button>
 
                     <GoogleLogin
                         clientId="886894346654-eekbgqs2hps8v1tlj96u3m822f6gqmmb.apps.googleusercontent.com"
@@ -107,6 +124,7 @@ class Login extends Component {
                         onSuccess={this.googleSuccess}
                         onFailure={this.googleFail}
                         className="social-button"
+                        disabled={this.state.username || this.state.password}
                     />
                 </div>
             </div>
@@ -114,4 +132,4 @@ class Login extends Component {
     }
 }
 
-export default connect()(Login);
+export default Login;

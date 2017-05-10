@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import * as ws from '../utils/ws';
+import {handleInputChange} from '../utils/utils';
 
 export class CreateNewMessage extends Component {
     constructor(props){
@@ -8,13 +9,8 @@ export class CreateNewMessage extends Component {
         this.state = {
             msg: ''
         }
-        this.handleMessageChange = this.handleMessageChange.bind(this);
         this.submitMessage = this.submitMessage.bind(this);
-    }
-
-    handleMessageChange(e){
-        this.setState(state => ({msg: e.target.value}));
-        e.persist();
+        this.handleInputChange = handleInputChange.bind(this);
     }
 
     clearForm() {
@@ -32,7 +28,7 @@ export class CreateNewMessage extends Component {
 
                     <textarea value={this.state.msg} 
                             placeholder="Type message"
-                            onChange={this.handleMessageChange} 
+                            onChange={this.handleInputChange('msg')} 
                             required></textarea>
                 <button type="submit" onClick={this.submitMessage}>Send</button>
             </div>

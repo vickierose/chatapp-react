@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import * as validation from '../utils/validation';
 import GoogleLogin from 'react-google-login';
 
- const classNames = require('classnames');
-
 class Login extends Component {
   constructor(...args) {
     super(...args);
@@ -82,7 +80,7 @@ class Login extends Component {
     handlePasswordChange(e){
         this.setState(state => ({password: e.target.value}));
         this.checkFormValidity();
-         e.persist();
+        e.persist();
     }
 
     componentWillMount() {
@@ -102,7 +100,7 @@ class Login extends Component {
                                 onChange={this.handleLoginChange}
                                 placeholder="Login" 
                                 required />
-                        <div className='error'>
+                        <div className='error empty-login-err'>
                             Login is required</div>
                     </label>
                     <label>
@@ -111,7 +109,7 @@ class Login extends Component {
                                 onChange={this.handlePasswordChange}
                                 placeholder="Password" 
                                 required />
-                        <div className='error'>Password is required</div>
+                        <div className='error empty-password-err'>Password is required</div>
                     </label>
 
                     <button type="submit" 

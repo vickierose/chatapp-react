@@ -1,26 +1,19 @@
+import validator from 'validator';
+
 export {
     isNotEmpty,
     isEmail,
-    isEqual,
+    validateLength,
 }
 
-function isNotEmpty(field){
-    if (!field) {return false
-    }else{
-        return true
-    }
+function isNotEmpty(value){
+    return !validator.isEmpty(value)
 }
 
 function isEmail(field){
-    const emailPattern = new RegExp('^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$')
-    const result = field.match(emailPattern);
-    if(result){
-        return true
-    }else{
-        return false
-    }
+    return validator.isEmail(field);
 }
 
-function isEqual(field1, field2){
-    return field1 === field2; 
+function validateLength(value) {
+  return validator.isLength(value, { min: 3 });
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import * as ws from '../utils/ws';
 import {handleInputChange} from '../utils/utils';
+import * as validation from '../utils/validation';
+import { Validate, ValidateGroup } from 'react-validate';
 
 export class CreateNewMessage extends Component {
     constructor(props){
@@ -17,21 +19,25 @@ export class CreateNewMessage extends Component {
         this.setState({ msg: '' });
     }
 
-   submitMessage() {
+   submitMessage(e) {
        ws.sendMessage(this.state.msg);
        this.clearForm();
+       e.preventDefault();
     }
 
     render() {
         return (
-            <div className='create-new-message-form'>
-
-                    <textarea value={this.state.msg} 
+            <form onSubmit={this.submitMessage} className='create-new-message-form'>
+                <ValidateGroup>
+                    <Validate validators={[validation.isNotEmpty]}>
+                    <textarea value={this.state.msg}
                             placeholder="Type message"
                             onChange={this.handleInputChange('msg')} 
-                            required></textarea>
-                <button type="submit" onClick={this.submitMessage}>Send</button>
-            </div>
+                            ></textarea>
+                    </Validate>
+                <button type="submit">Send</button>
+                </ValidateGroup>
+            </form>
         );
     }
 }

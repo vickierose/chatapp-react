@@ -2,29 +2,22 @@ import React, { Component } from 'react';
 // import * as ws from '../utils/ws';
 import * as validation from '../utils/validation';
 import GoogleLogin from 'react-google-login';
+import { Validate, ValidateGroup, ErrorMessage } from 'react-validate';
+import {handleInputChange} from '../utils/utils';
 
 class Login extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
             username: '',
-            password: '',
-            formIsValid: false
+            password: ''
         }
-    this.checkFormValidity = this.checkFormValidity.bind(this);
-    this.handleLoginChange = this.handleLoginChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+
+    this.handleInputChange = handleInputChange.bind(this);
     this.logIn = this.logIn.bind(this);
+    this.submitForm = this.submitForm.bind(this);
     this.googleSuccess = this.googleSuccess.bind(this);
     this.googleFail = this.googleFail.bind(this);
-  }
-
-  checkFormValidity(){
-      if(validation.isNotEmpty(this.state.username) && validation.isNotEmpty(this.state.password)){
-          this.setState(({state}) => ({formIsValid: true}))
-      }else{
-          this.setState(({state}) => ({formIsValid: false}))
-      }
   }
   
   logIn(){
@@ -43,18 +36,24 @@ class Login extends Component {
     .then(() =>getMessages());
   }
 
+  submitForm(e){
+       e.preventDefault();
+       this.logIn();
+  }
+
   googleSuccess(res){
       console.log(res);
-    let userData = {
-        token: res.accessToken,
-        tokenType: res.tokenObj.token_type,
-        user:{
-            username: res.profileObj.name,
-            email: res.profileObj.email,
-            googleId: res.profileObj.googleId,
-            imageUrl: res.profileObj.imageUrl
+
+        let userData = {
+            token: res.accessToken,
+            tokenType: res.tokenObj.token_type,
+            user:{
+                username: res.profileObj.name,
+                email: res.profileObj.email,
+                googleId: res.profileObj.googleId,
+                imageUrl: res.profileObj.imageUrl
+            }
         }
-    }
 
     localStorage.setItem('userdata', JSON.stringify(userData));
     this.props.loginWithToken(localStorage.userdata);
@@ -71,18 +70,6 @@ class Login extends Component {
       console.log(err)
   }
 
-  handleLoginChange(e){
-        this.setState(state => ({username: e.target.value}));
-        this.checkFormValidity();
-        e.persist();
-    }
-
-    handlePasswordChange(e){
-        this.setState(state => ({password: e.target.value}));
-        this.checkFormValidity();
-        e.persist();
-    }
-
     componentWillMount() {
         if(this.props.login.user){
             this.props.push('/')
@@ -93,38 +80,34 @@ class Login extends Component {
         return (
             <div className='auth-container'>
                 <h2>Login</h2>
-                <div>
-                    <label>
-                        <input type="text"
-                                value = {this.state.username}
-                                onChange={this.handleLoginChange}
-                                placeholder="Login" 
-                                required />
-                        <div className='error empty-login-err'>
-                            Login is required</div>
-                    </label>
-                    <label>
-                        <input type="password"
-                                value={this.state.password}
-                                onChange={this.handlePasswordChange}
-                                placeholder="Password" 
-                                required />
-                        <div className='error empty-password-err'>Password is required</div>
-                    </label>
+                <form onSubmit={this.submitForm}>
+                    <ValidateGroup>
+                        <Validate validators={[validation.isNotEmpty]}>
+                            <input type="text"
+                                    onChange={this.handleInputChange('username')}
+                                    placeholder="Login" 
+                                    />
+                            <ErrorMessage>Login is required</ErrorMessage>
+                        </Validate>
+                        <Validate validators={[validation.validateLength]}>
+                            <input type="password"
+                                    onChange={this.handleInputChange('password')}
+                                    placeholder="Password" 
+                                    />
+                            <ErrorMessage>Password should be at least 3 symbols</ErrorMessage>
+                        </Validate>
 
-                    <button type="submit" 
-                            disabled={!this.state.formIsValid}
-                            onClick={this.logIn}>Log In</button>
+                        <button type="submit">Log In</button>
+                    </ValidateGroup>
+                </form>
 
-                    <GoogleLogin
+                <GoogleLogin
                         clientId="886894346654-eekbgqs2hps8v1tlj96u3m822f6gqmmb.apps.googleusercontent.com"
                         buttonText="Login with Google"
                         onSuccess={this.googleSuccess}
                         onFailure={this.googleFail}
                         className="social-button"
-                        disabled={this.state.username || this.state.password}
-                    />
-                </div>
+                        disabled={this.state.username || this.state.password}/>
             </div>
         );
     }

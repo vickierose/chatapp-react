@@ -3,7 +3,9 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as validation from '../utils/validation';
-
+import { Validate, ValidateGroup, ErrorMessage } from 'react-validate';
+import {handleInputChange} from '../utils/utils';
+import validator from 'validator';
 import {loginUser} from '../actions/login';
 // import * as chatActions from '../actions/chat';
 import {getMessages} from '../actions/chat';
@@ -17,53 +19,20 @@ class RegisterPage extends Component {
             newUserEmail: '',
             newUserPassword: '',
             passwordConfirm: '',
-            formIsValid: false
         };
-        this.checkFormValidity = this.checkFormValidity.bind(this);
+        
+        this.handleInputChange = handleInputChange.bind(this);
         this.register = this.register.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handleConfirmPassChange = this.handleConfirmPassChange.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        this.validateConfirmPassword = this.validateConfirmPassword.bind(this);
     }
 
-    checkFormValidity(){
-      if (validation.isNotEmpty(this.state.newUserLogin) 
-            && validation.isNotEmpty(this.state.newUserEmail)
-            && validation.isEmail(this.state.newUserEmail)
-            && validation.isNotEmpty(this.state.newUserPassword)
-            && validation.isNotEmpty(this.state.passwordConfirm)
-            && validation.isEqual(this.state.newUserPassword, this.state.passwordConfirm)
-        ){
-          this.setState(({state}) => ({formIsValid: true}))
-            }else{
-                this.setState(({state}) => ({formIsValid: false}))
-            }
-    }
-
-    handleNameChange(e){
-        this.setState(state => ({newUserLogin: e.target.value}));
-        this.checkFormValidity();
-        e.persist();
-    }
-    handleEmailChange(e){
-        this.setState(state => ({newUserEmail: e.target.value}));
-        this.checkFormValidity();
-        e.persist();
-    }
-    handlePasswordChange(e){
-        this.setState(state => ({newUserPassword: e.target.value}));
-        this.checkFormValidity();
-        e.persist();
-    }
-    handleConfirmPassChange(e){
-        this.setState(state => ({passwordConfirm: e.target.value}));
-        this.checkFormValidity();
-        e.persist();
+    validateConfirmPassword(value){
+        return validator.equals(value, this.state.newUserPassword)
     }
 
     register(){
-     let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
+        let myHeaders = new Headers(); myHeaders.set('Content-Type', 'application/json');
 
         let myInit = {
                 method: 'post',
@@ -89,6 +58,11 @@ class RegisterPage extends Component {
         .then(() =>this.props.getMessages());
     }
 
+    submitForm(e){
+       e.preventDefault();
+       this.register();
+    }
+
     componentWillMount() {
         if(this.props.login.user){
             this.props.push('/')
@@ -99,52 +73,38 @@ class RegisterPage extends Component {
         return (
            <div className='auth-container'>
                <h2>Register</h2>
-                <div>
-                    <label>
-                        <input type="text"  
-                                placeholder="Full Name"
-                                value={this.state.newUserLogin}
-                                onChange={this.handleNameChange} />
-                                <div className='error'>
-                            Name is required</div>
-                    </label>
-
-                    <label>
-                        <input type="email" 
-                                placeholder="E-mail"
-                                value={this.state.newUserEmail}
-                                onChange={this.handleEmailChange} />
-                            <div className='error'>
-                            Email is required</div>
-                            <div className='error'>
-                            This is not a valid email</div>
-                    </label>
-
-                    <div>
-                        <label>
-                            <input type="password" 
-                                    placeholder="Password"
-                                    value={this.state.newUserPassword}
-                                    onChange={this.handlePasswordChange} />
-                            <div className='error'>
-                            Password is required</div>                                   
-                        </label>
-
-                        <label>
-                            <input type="password" 
-                                    placeholder="Confirm Password"
-                                    value={this.state.passwordConfirm}
-                                    onChange={this.handleConfirmPassChange} />
-                            <div className='error'>
-                            Confirm password field is required</div>
-                            <div className='error'>
-                            Passwords does not match</div>
-                        </label>
-                    </div>
-
-                    <button type="submit" disabled={!this.state.formIsValid} onClick={this.register}>Sign Up</button>
-                    </div>
-                </div> 
+                <form onSubmit={this.submitForm}>
+                    <ValidateGroup>
+                        <Validate validators={[validation.isNotEmpty]}>
+                            <input type="text"  
+                                    placeholder="Full Name"
+                                    onChange={this.handleInputChange('newUserLogin')} />
+                            <ErrorMessage>Username is required</ErrorMessage>
+                        </Validate>
+                        <Validate validators={[validation.isNotEmpty, validation.isEmail]}>
+                            <input type="email" 
+                                    placeholder="E-mail"
+                                    
+                                    onChange={this.handleInputChange('newUserEmail')} />
+                            <ErrorMessage>Please put a valid email</ErrorMessage>
+                        </Validate>
+                        <Validate validators={[validation.validateLength]}>
+                                <input type="password" 
+                                        placeholder="Password"
+                                        onChange={this.handleInputChange('newUserPassword')} />
+                                <ErrorMessage>Password should be at least 3 symbols</ErrorMessage>
+                        </Validate>                                   
+                        <Validate validators={[validation.validateLength, this.validateConfirmPassword]}>
+                                <input type="password" 
+                                        placeholder="Confirm Password"
+                                        onChange={this.handleInputChange('passwordConfirm')} />
+                                <ErrorMessage>Passwords missmatch</ErrorMessage>
+                        </Validate>
+                        
+                        <button type="submit">Sign Up</button>
+                    </ValidateGroup>
+                 </form>
+            </div> 
         );
     }
 }

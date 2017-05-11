@@ -1,7 +1,14 @@
 @import './mixins';
 
 .create-new-message-form {
-    @include display-flex(row);
+	&>div{
+		 @include display-flex(row);
+		 width: 100%;
+		 div {
+			width: 70%;
+		 }
+	}
+    // @include display-flex(row);
 	button {
 		border-radius: 2rem;
 		height:  2rem;
@@ -21,6 +28,6 @@
 		margin: 1rem;
 		padding: 1em 1rem;
 		vertical-align: middle;
-   		width: 70%;
+   		width: 90%;
 	}	
 }

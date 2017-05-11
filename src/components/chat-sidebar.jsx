@@ -39,7 +39,8 @@ class ChatSidebar extends Component {
                 <ChatSidebarNav sizingSidebar={this.toggleSidebar} 
                                 arrowClosed={this.state.isSidebarOpen}
                                 filterValue={this.state.filterValue}
-                                handleFilterChange={this.handleSearchChange}/>
+                                handleFilterChange={this.handleSearchChange}
+                                changePage={this.props.changePage}/>
                 <ChatSidebarList {...this.props} filterValue={this.state.filterValue}/>
             </aside>
         );

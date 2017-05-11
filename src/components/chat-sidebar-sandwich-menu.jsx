@@ -5,7 +5,13 @@ class ChatSidebarSandwichMenu extends Component {
     constructor(props){
         super(props);
         this.state = {  }
+        this.showNewChatPage = this.showNewChatPage.bind(this);
     }
+
+    showNewChatPage(e){
+            this.props.changePage('createNewChat');
+        }
+
     render() {
         const menuClasses = classNames({
             'sandwich-menu': true,
@@ -15,7 +21,7 @@ class ChatSidebarSandwichMenu extends Component {
         return (
             <nav className={menuClasses}>
                 <ul>
-                    <li><a>New Chat</a></li>
+                    <li><a onClick={this.showNewChatPage}>New Chat</a></li>
                     <li><a href="#">smthng1</a></li>
                     <li><a href="#">smthng2</a></li>
                     <li><a href="#">smthng3</a></li>

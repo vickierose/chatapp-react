@@ -54,7 +54,7 @@ export class ChatSidebarNav extends Component {
 
                     <div className='sandwich-icon' onClick={this.toggleSandwichMenu}></div>
 
-                    <ChatSidebarSandwichMenu displayState={this.state.sandwichMenuOpened} />
+                    <ChatSidebarSandwichMenu displayState={this.state.sandwichMenuOpened} changePage={this.props.changePage}/>
             </header>
         );
     }

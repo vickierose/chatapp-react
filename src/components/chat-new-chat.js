@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 
 class CreateNewChat extends Component {
-    constructor(){
+    constructor(props){
+        super(props);
         this.state = {}
         this.createNewChat = this.createNewChat.bind(this);
     }
 
+    showChat(e){
+            this.props.changePage('chat');
+        }
+
     createNewChat(e){
         e.preventDefault();
-        console.log('new Chat created!')
+        console.log('new Chat created!');
+        this.showChat();
     }
     render() {
         return (
@@ -28,15 +34,14 @@ class CreateNewChat extends Component {
                     <ul className="userlist">
                         <li className="new-chat-user">
                             <div className="photo"></div>
-                            <span className="new-chat-user__info">{user.username}</span>
+                            <span className="new-chat-user__info"></span>
                             <button type="button" className="user-selection-btn">
                                     &#10003;
                             </button>
                         </li>
                     </ul>
 
-                    <button
-                        type="submit">
+                    <button type="submit">
                         Create new chat
                     </button>
                 </form>

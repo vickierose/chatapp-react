@@ -1,5 +1,6 @@
 @import './mixins';
 .new-chat-form{
+    flex-grow: 1;
     h3 {
         margin-top: 1rem;
     }

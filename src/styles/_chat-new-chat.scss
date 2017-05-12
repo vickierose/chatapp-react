@@ -24,17 +24,25 @@
                 background-color: $disabled-button-violet;
             }
     }
+    .userpicker {
+        display: none;
+        &--showed{
+            @include display-flex(column);
+        }
+    }
+
+    
 
     .userlist {
         @extend form;
         background-color: $userlist-bg-violet;
         color: $main-text-white;
-        display: none;
         height: calc(100vh - 400px);
         overflow-y: auto;
         button {
             border: 2px solid $check-btn-border;
             border-radius: 50%;
+            margin-bottom: 0;
             padding: 0 .4rem;
             width: initial;
         }

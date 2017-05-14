@@ -10,7 +10,7 @@ export {
 function loginUser(credentials) {
  
   return dispatch => {
-     return post('http://eleksfrontendcamp-mockapitron.rhcloud.com/login', credentials).then(response => {
+     return post('http://localhost:3000/auth/login', credentials).then(response => {
        return response.json()
        .then(user => {
          return dispatch({

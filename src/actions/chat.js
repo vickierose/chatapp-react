@@ -42,7 +42,7 @@ function leaveChat(userdata) {
 }
 
 function getMessages(){
-  return dispatch => getRequest('http://eleksfrontendcamp-mockapitron.rhcloud.com/messages')
+  return dispatch => getRequest('http://localhost:3000/chat')
    .then(res => res.json())
    .then(messages =>{
      return dispatch({

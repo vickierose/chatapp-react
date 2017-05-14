@@ -7,7 +7,7 @@ export {
 }
 
 function getUsers(){
-  return dispatch => getRequest('http://eleksfrontendcamp-mockapitron.rhcloud.com/users')
+  return dispatch => getRequest('http://localhost:3000/users')
   .then(res => res.json())
   .then(users => {
     return dispatch({

@@ -13,11 +13,16 @@
         font-size: 1.5rem;
         margin-right: 1rem;
     }
+    .offline {
+        display: block;
+        font-size: .75rem;
+    }
+    .online {
+        visibility: hidden;
+    }
 
     nav {
-        
         flex-grow: 1;
-       
         margin-left: calc(40% - 170px);
 
         @media screen and (min-width: 601px) and (max-width:800px) {

@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Indicator from './indicator';
 
 import {store} from '../app';
+
+const classNames = require('classnames');
+
+
+// function updateOnline(){
+//     mystore.isOnline = navigator.onLine;
+// }
+// window.addEventListener('online',  updateOnline);
+// window.addEventListener('offline', updateOnline);
 
 class MainHeader extends Component {
     constructor(...args){
         super(...args);
+        // this.state = {
+        //     isOnline: condition
+        // }
         this.logOut = this.logOut.bind(this);
     }
 
@@ -49,9 +62,16 @@ class MainHeader extends Component {
     }
 
     render() {
+        // const indication = classNames({
+        //     indicator: true,
+        //     online: this.state.isOnline
+        // })
         return (
             <header className='main-header'>
-                <p className='logo'>ChatterBox</p>
+                <p className='logo'>ChatterBox
+                    <Indicator />
+                    {/*<span className={indication}>Offline</span>*/}
+                </p>
                 <nav>
                     {this.links}
                 </nav>
@@ -61,4 +81,3 @@ class MainHeader extends Component {
 }
 
 export default connect()(MainHeader)
-// export default MainHeader;

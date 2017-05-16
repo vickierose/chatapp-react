@@ -1,16 +1,67 @@
 @import './mixins';
 
 .profile-page {
+    * {
+        display: block;
+    }
+
     form{
         @include display-flex (column);
-         align-items: center;
+        margin: 0 auto;
+        width: 400px;
+
+        @media screen and(max-width:420px){
+                width: 100%;
+        }
+
+         &>label{
+             @include display-flex(row);
+             align-items: baseline;
+             justify-content: space-between;
+             margin-left: 0.5rem;
+             margin-right: 0.5rem; 
+             margin-top: 1rem;
+         }
+    }
+
+    .file-upload {
+        display: flex;
+        position: relative;
+        overflow: hidden;
+        font-size: .75rem;              /* example */
+        height: 1.5rem;                 /* example */
+        line-height: 1.5rem;
+        .button {
+            background-color: $buttons-bg-violet;
+            border-radius: 1rem;
+            color: $main-text-white;
+            cursor: pointer;
+            display: block;
+            height: 100%;
+            text-align: center; 
+            width: 8em;
+            &:hover {
+                background-color: $hover-bg;
+            }  
+        }
+        mark {
+            @extend .button;
+            background: transparent;
+            color: $main-text-black;
+            &:hover {
+                background: transparent;
+            }
+        }     
     }
 
     input {
 		border-bottom: 1px solid $input-underline-violet;
-        margin-top: 1rem;
+        // margin-top: 1rem;
         &[type='file']{
-            font-size: .75rem;
+            border: none;
+            opacity: 0;
+            position: absolute;
+            top: 0;
         }
 	}
 

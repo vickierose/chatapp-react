@@ -40,9 +40,11 @@ class ChatMessage extends Component {
 
         let messageDate = moment(this.props.message.time).format('LT');
 
+         const nameFirstSym = this.props.message.user.username.charAt(0).toUpperCase();
+
         return (
             <li className={messageClasses}>
-                <div className='photo'></div>
+                <div className='photo'>{nameFirstSym}</div>
                 <div className='message-text'>
                     <span>{this.props.message.user.username} >> {this.checkMessage()}</span>
                     <div className='time'>{this.formatDate()}</div>

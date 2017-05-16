@@ -1,10 +1,11 @@
-import { LOGIN, LOGOUT, LOGIN_WITH_TOKEN } from '../constants/login';
-import { post } from '../utils/fetch';
+import { LOGIN, LOGOUT, LOGIN_WITH_TOKEN, UPDATE_PROFILE } from '../constants/login';
+import { post, put, getRequest } from '../utils/fetch';
 
 export {
   loginUser,
   logoutUser,
-  loginWithToken
+  loginWithToken,
+  updateProfile
 };
 
 function loginUser(credentials) {
@@ -37,5 +38,20 @@ function loginWithToken(userdata) {
     payload: {
       user: JSON.parse(userdata)
     }
+  }
+}
+
+function updateProfile(data) {
+  return dispatch =>{
+    return put(data.url, data.cred)
+      .then(res =>res.json())
+      .then(user =>{
+        return dispatch({
+          type: UPDATE_PROFILE,
+          payload:{
+            user
+          }
+        })
+      })
   }
 }

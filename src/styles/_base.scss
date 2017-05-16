@@ -95,7 +95,6 @@ a {
 
 .photo {
 		background: deeppink;
-		// background-position: -12px 0;
 		background-repeat: no-repeat;
 		border-radius: 50%;
     color: $main-text-white;
@@ -103,4 +102,8 @@ a {
     line-height: 45px;
 		min-width: 45px;
     text-align: center;
+    img {
+      height: 100%;
+      border-radius: 50%;
+    }
 	}

@@ -28,9 +28,20 @@ class ChatMessage extends Component {
             lastDay: 'L',
             lastWeek: 'L',
             sameElse: 'L',
-        })
-        
+        })  
     }
+
+     get avatar (){
+        const nameFirstSym = this.props.message.user.username.charAt(0).toUpperCase();
+        if(this.props.message.user.avatar){
+            return (
+                 <img src={this.props.message.user.avatar} />
+            )
+        }else {
+            return nameFirstSym
+        }
+    }
+
     render() {
         let messageClasses = classNames({
             message: true,
@@ -40,11 +51,9 @@ class ChatMessage extends Component {
 
         let messageDate = moment(this.props.message.time).format('LT');
 
-         const nameFirstSym = this.props.message.user.username.charAt(0).toUpperCase();
-
         return (
             <li className={messageClasses}>
-                <div className='photo'>{nameFirstSym}</div>
+                <div className='photo'>{this.avatar}</div>
                 <div className='message-text'>
                     <span>{this.props.message.user.username} >> {this.checkMessage()}</span>
                     <div className='time'>{this.formatDate()}</div>

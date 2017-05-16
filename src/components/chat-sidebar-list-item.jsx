@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 
 export class ChatSidebarListItem extends Component {
-    render() {
-        // let photoStyle = {
-        //     backgroundImage: 'url('+ "../mock-data/" + this.props.chat.photo + ')',
-        //     backgroundPosition: this.props.chat.position
-        // }
+    get avatar (){
         const nameFirstSym = this.props.user.username.charAt(0).toUpperCase();
+        if(this.props.user.avatar){
+            return (
+                 <img src={this.props.user.avatar} />
+            )
+        }else {
+            return nameFirstSym
+        }
+    }
+
+    render() {
         return (
             <li className='chat-sidebar-list-item'>
-                <div className='photo'>{nameFirstSym}</div>
+                <div className='photo'>
+                   {this.avatar}
+                </div>
                 <div className='chat-info'>
                     <p className='chat-name'>{this.props.user.username}</p>
                     <p>{this.props.user.status || ""}</p>

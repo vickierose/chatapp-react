@@ -13,7 +13,7 @@ import {put, getRequest} from '../utils/fetch';
             username: this.props.login.user.username,
             status: this.props.login.user.status,
             email: this.props.login.user.email,
-            // avatar: "",
+            avatar: "",
         };
         this.handleInputChange=handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,13 +32,13 @@ import {put, getRequest} from '../utils/fetch';
         console.log('Saved!');
      }
 
-    //  get avatarPath(){
-    //      if(this.state.avatar !== ""){
-    //      return this.state.avatar
-    //     }else{
-    //         return 'No file choosen'
-    //     }
-    //  }
+     get avatarPath(){
+         if(this.state.avatar !== ""){
+         return this.state.avatar
+        }else{
+            return 'No file choosen'
+        }
+     }
 
     componentWillMount() {
         if(!this.props.login.user){
@@ -51,7 +51,7 @@ import {put, getRequest} from '../utils/fetch';
             <div className='profile-page'>
                 <h2>Profile</h2>
                 <form onSubmit={this.handleSubmit}>
-                    {/*<label>
+                    <label>
                         <span>Avatar</span>
                         <label className="file-upload">
                             <span className="button">Choose a pic</span>
@@ -59,7 +59,7 @@ import {put, getRequest} from '../utils/fetch';
                             <input type="file" 
                                     onChange={this.handleInputChange("avatar")}/>
                         </label>
-                    </label>*/}
+                    </label>
 
                     <label>
                         <span>Username</span>

@@ -33,7 +33,7 @@ class ChatMessage extends Component {
 
      get avatar (){
         const nameFirstSym = this.props.message.user.username.charAt(0).toUpperCase();
-        if(this.props.message.user.avatar){
+        if(this.props.message.user.avatar &&  typeof(this.props.message.user.avatar) !== 'object'){
             return (
                  <img src={this.props.message.user.avatar} />
             )
@@ -46,7 +46,8 @@ class ChatMessage extends Component {
         let messageClasses = classNames({
             message: true,
             'outcoming-message': 
-                this.props.message.user.username === store.getState().login.user.username
+                this.props.message.user.username === store.getState().login.user.username,
+                'incoming-message': this.props.message.user.username !== store.getState().login.user.username
         })
 
         let messageDate = moment(this.props.message.time).format('LT');
@@ -55,7 +56,8 @@ class ChatMessage extends Component {
             <li className={messageClasses}>
                 <div className='photo'>{this.avatar}</div>
                 <div className='message-text'>
-                    <span>{this.props.message.user.username} >> {this.checkMessage()}</span>
+                    <div className='username'>{this.props.message.user.username}</div>
+                    <span>{this.checkMessage()}</span>
                     <div className='time'>{this.formatDate()}</div>
                 </div>
             </li>

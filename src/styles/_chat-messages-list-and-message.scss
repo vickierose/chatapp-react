@@ -6,12 +6,11 @@
 		@include display-flex (row);
 		font-size: .7rem;
 		margin: 1.75rem;
-
+		margin-bottom: 2.25rem;
         color: $main-text-white;
 
         .photo {
 		    align-self: flex-end;
-
             margin-right: .5rem;
 	    }
 	}
@@ -21,15 +20,20 @@
    		padding: 1.25rem 2em;
     	max-width: 50%;
     	position: relative;	
-
         background-color: $message-from-bg;
-			}
+	}
+
+	.username {
+		color: $username-color;
+		font-size: .6rem;
+		position: absolute;
+    	top: -.7rem;
+	}
 
 	.time {
     	position: absolute;
     	color: lightgrey;
     	bottom: -1rem;
    		font-size: .5rem;
-
         right: 0;
     }

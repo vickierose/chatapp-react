@@ -44,7 +44,7 @@ class RegisterPage extends Component {
 
         };
 
-        fetch('http://eleksfrontendcamp-mockapitron.rhcloud.com/signup', myInit)
+        fetch('http://localhost:3000/auth/signup', myInit)
         .then(() => 
             this.props.loginUser({username: this.state.newUserLogin,
                                 password: this.state.newUserPassword})

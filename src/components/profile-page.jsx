@@ -22,19 +22,22 @@ import {put, getRequest} from '../utils/fetch';
      handleSubmit(e){
         const id = this.props.login.user._id;
         const url = `http://localhost:3000/users/${this.props.login.user._id}`
-        const dataToSend = {
-            username: this.state.username,
-            status: this.state.status,
-            email: this.state.email
-        };
+        const dataToSend = new FormData();
+
+        dataToSend.append('avatar', this.avatar.files[0])
+        dataToSend.append('username', this.state.username)
+        dataToSend.append('status', this.state.status)
+        dataToSend.append('email', this.state.email)
+
         this.props.updateProfile({url: url, cred: dataToSend})
         e.preventDefault();
-        console.log('Saved!');
+        alert('Changes Saved!');
      }
 
      get avatarPath(){
          if(this.state.avatar !== ""){
-         return this.state.avatar
+             const pathArr = this.state.avatar.split('\\');
+         return pathArr[pathArr.length-1]
         }else{
             return 'No file choosen'
         }
@@ -50,14 +53,21 @@ import {put, getRequest} from '../utils/fetch';
         return (
             <div className='profile-page'>
                 <h2>Profile</h2>
-                <form onSubmit={this.handleSubmit}>
+                
+                <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
+                    <div className='profile-pic'>
+                        <img src={this.props.login.user.avatar}/>
+                    </div>
+
                     <label>
                         <span>Avatar</span>
                         <label className="file-upload">
                             <span className="button">Choose a pic</span>
                             <mark>{this.avatarPath}</mark>
-                            <input type="file" 
-                                    onChange={this.handleInputChange("avatar")}/>
+                            <input type="file"
+                                    onChange={this.handleInputChange("avatar")}
+                                    name='avatar'
+                                    ref={(input) => { this.avatar = input; }}/>
                         </label>
                     </label>
 

@@ -4,11 +4,6 @@ export {
    put
  };
 
-//  export {
-//    getRequest,
-//    put
-//  }
- 
  function post(url, data) {
    return fetch(new Request(url, {
      method: 'POST',
@@ -21,9 +16,9 @@ export {
  function put(url, data){
    return fetch(new Request(url, {
      method: 'PUT',
-     headers: {'Content-type': 'application/json'},
+    //  headers: {'Content-type': 'multipart/form-data'},
      mode: 'cors',
-     body: JSON.stringify(data)
+     body: data
    }))
  }
 

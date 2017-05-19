@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import * as ws from '../utils/ws';
+import * as ws from '../utils/ws';
 import * as validation from '../utils/validation';
 import GoogleLogin from 'react-google-login';
 import { Validate, ValidateGroup, ErrorMessage } from 'react-validate';
@@ -43,7 +43,6 @@ class Login extends Component {
 
   googleSuccess(res){
       console.log(res);
-
         let userData = {
             token: res.accessToken,
             tokenType: res.tokenObj.token_type,
@@ -51,19 +50,23 @@ class Login extends Component {
                 username: res.profileObj.name,
                 email: res.profileObj.email,
                 googleId: res.profileObj.googleId,
-                imageUrl: res.profileObj.imageUrl
+                avatar: res.profileObj.imageUrl
             }
         }
 
-    localStorage.setItem('userdata', JSON.stringify(userData));
-    this.props.loginWithToken(localStorage.userdata);
-    this.props.push('/chat');
-    this.props.getUsers();
-    this.props.getMessages();
-    //  ws.initConnection();
-    //  ws.addListener('message', this.props.sendMessage);
-    //  ws.addListener('join', this.props.joinChat);
-    //  ws.addListener('leave', this.props.leaveChat);
+       this.props.googleLogin(userData.user)
+        .then(() =>{
+            localStorage.setItem('userdata', JSON.stringify(this.props.login))
+        })
+        .then(() =>{this.props.push('/chat')})
+        .then(() => {this.props.getUsers()})
+        .then(() => {this.props.getMessages()})
+        // .then(() =>{
+            ws.initConnection();
+            ws.addListener('message', this.props.sendMessage);
+            ws.addListener('join', this.props.joinChat);
+            ws.addListener('leave', this.props.leaveChat);
+        // })
   }
 
   googleFail(err){

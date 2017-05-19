@@ -1,9 +1,10 @@
-import { LOGIN, LOGOUT, LOGIN_WITH_TOKEN, UPDATE_PROFILE } from '../constants/login';
+import { LOGIN, LOGOUT, LOGIN_WITH_TOKEN, UPDATE_PROFILE, GOOGLE_LOGIN } from '../constants/login';
 import { post, put, getRequest } from '../utils/fetch';
 
 export {
   loginUser,
   logoutUser,
+  googleLogin,
   loginWithToken,
   updateProfile
 };
@@ -30,6 +31,19 @@ function logoutUser() {
   return {
     type: LOGOUT
   };
+}
+
+function googleLogin(userdata){
+  return dispatch => {
+    return post('http://localhost:3000/auth/google', userdata)
+      .then(res => res.json())
+      .then(user =>{
+        return dispatch({
+          type: GOOGLE_LOGIN,
+          payload: {user}
+        })
+      })
+  }
 }
 
 function loginWithToken(userdata) {

@@ -43,7 +43,6 @@ class ChatMessage extends Component {
     }
 
     render() {
-        console.log(this.props.message);
         let messageClasses = classNames({
             message: true,
             'outcoming-message': 

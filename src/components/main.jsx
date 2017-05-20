@@ -32,15 +32,9 @@ class Main extends Component {
 
     componentWillMount() {
         if(localStorage.userdata){
-            this.props.loginWithToken(localStorage.userdata);
-            this.props.getUsers();
-            this.props.getMessages();
-
-             ws.initConnection();
-             ws.addListener('message', this.props.sendMessage);
-             ws.addListener('join', this.props.joinChat);
-             ws.addListener('leave', this.props.leaveChat);
-            
+            this.props.loginWithToken(localStorage.userdata)
+            .then(() =>this.props.getUsers())
+            .then(() =>this.props.getMessages())  
         }
     }
 

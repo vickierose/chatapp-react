@@ -1,9 +1,4 @@
-# ignore all in node_modules folder
-
 node_modules/
-
-# ignore all in dist folder
-
 dist/
-
 *.log
+.vscode/

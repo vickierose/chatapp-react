@@ -79,6 +79,12 @@ class Login extends Component {
         }
     }
 
+    componentWillReceiveProps({ login }){
+         if(this.props.login.user){
+            this.props.push('/chat')
+        }
+    }
+
     render() {
         return (
             <div className='auth-container'>

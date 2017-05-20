@@ -10,9 +10,9 @@ import {put, getRequest} from '../utils/fetch';
      constructor(...args){
         super(...args);
         this.state = {
-            username: this.props.login.user.username,
-            status: this.props.login.user.status,
-            email: this.props.login.user.email,
+            username: this.props.login.user ? this.props.login.user.username : '',
+            status: this.props.login.user ? this.props.login.user.status: '',
+            email: this.props.login.user ? this.props.login.user.email : '',
             avatar: "",
         };
         this.handleInputChange=handleInputChange.bind(this);
@@ -43,6 +43,16 @@ import {put, getRequest} from '../utils/fetch';
         }
      }
 
+     get profilePic(){
+         if(this.props.login.user.avatar){
+            return (
+                <img src={this.props.login.user.avatar}/>
+            )
+         }else{
+             return 'No avatar'
+         }
+     }
+
     componentWillMount() {
         if(!this.props.login.user){
             this.props.push('/login')
@@ -56,7 +66,7 @@ import {put, getRequest} from '../utils/fetch';
                 
                 <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
                     <div className='profile-pic'>
-                        <img src={this.props.login.user.avatar}/>
+                        {this.profilePic}
                     </div>
 
                     <label>

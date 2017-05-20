@@ -47,11 +47,21 @@ function googleLogin(userdata){
 }
 
 function loginWithToken(userdata) {
-  return {
-    type: LOGIN_WITH_TOKEN,
-    payload: {
-      user: JSON.parse(userdata)
-    }
+    const lSData = JSON.parse(userdata);
+  return dispatch => {
+    return getRequest('http://localhost:3000/users/'
+          +lSData.user._id)
+    .then(res => res.json())
+    .then(user =>{
+      return dispatch({
+        type: LOGIN_WITH_TOKEN,
+        payload: {
+          user,
+          token: lSData.token,
+          tokenType: lSData.tokenType
+        }
+      })
+    })
   }
 }
 

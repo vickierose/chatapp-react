@@ -9,7 +9,7 @@ export default function (state = {}, action){
     case GOOGLE_LOGIN:
       return action.payload.user;
     case LOGIN_WITH_TOKEN:
-      return action.payload.user;
+      return action.payload;
     case UPDATE_PROFILE:
       return Object.assign({},state, {user: action.payload.user});
     default:

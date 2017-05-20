@@ -43,30 +43,25 @@ class Login extends Component {
 
   googleSuccess(res){
       console.log(res);
-        let userData = {
-            token: res.accessToken,
-            tokenType: res.tokenObj.token_type,
-            user:{
-                username: res.profileObj.name,
-                email: res.profileObj.email,
-                googleId: res.profileObj.googleId,
-                avatar: res.profileObj.imageUrl
-            }
-        }
+      const id_token = res.getAuthResponse().id_token;
+        // let userData = {
+        //     token: res.accessToken,
+        //     tokenType: res.tokenObj.token_type,
+        //     user:{
+        //         username: res.profileObj.name,
+        //         email: res.profileObj.email,
+        //         googleId: res.profileObj.googleId,
+        //         avatar: res.profileObj.imageUrl
+        //     }
+        // }
 
-       this.props.googleLogin(userData.user)
+       this.props.googleLogin(id_token)
         .then(() =>{
             localStorage.setItem('userdata', JSON.stringify(this.props.login))
         })
         .then(() =>{this.props.push('/chat')})
         .then(() => {this.props.getUsers()})
         .then(() => {this.props.getMessages()})
-        // .then(() =>{
-            ws.initConnection();
-            ws.addListener('message', this.props.sendMessage);
-            ws.addListener('join', this.props.joinChat);
-            ws.addListener('leave', this.props.leaveChat);
-        // })
   }
 
   googleFail(err){

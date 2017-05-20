@@ -33,9 +33,9 @@ function logoutUser() {
   };
 }
 
-function googleLogin(userdata){
+function googleLogin(id_token){
   return dispatch => {
-    return post('http://localhost:3000/auth/google', userdata)
+    return post('http://localhost:3000/auth/google', {id_token})
       .then(res => res.json())
       .then(user =>{
         return dispatch({

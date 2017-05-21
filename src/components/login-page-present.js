@@ -4,13 +4,15 @@ import * as validation from '../utils/validation';
 import GoogleLogin from 'react-google-login';
 import { Validate, ValidateGroup, ErrorMessage } from 'react-validate';
 import {handleInputChange} from '../utils/utils';
+const classNames = require('classnames');
 
 class Login extends Component {
   constructor(...args) {
     super(...args);
     this.state = {
             username: '',
-            password: ''
+            password: '',
+            notify: false,
         }
 
     this.handleInputChange = handleInputChange.bind(this);
@@ -18,6 +20,7 @@ class Login extends Component {
     this.submitForm = this.submitForm.bind(this);
     this.googleSuccess = this.googleSuccess.bind(this);
     this.googleFail = this.googleFail.bind(this);
+    this.showNotification = this.showNotification.bind(this);
   }
   
   logIn(){
@@ -29,12 +32,21 @@ class Login extends Component {
 
     login({username, password})
     .then(() =>{
-        localStorage.setItem('userdata', JSON.stringify(this.props.login));
-    })
-    .then(() => {push('/chat')})
-    .then(() => getUsers())
-    .then(() =>getMessages());
+        if(this.props.login.user){
+            localStorage.setItem('userdata', JSON.stringify(this.props.login));
+            push('/chat');
+            getUsers();
+            getMessages();
+        }else{
+            this.showNotification();
+            setTimeout(this.showNotification, 3000);
+        }
+    });
   }
+
+  showNotification(){
+         this.setState(state => ({notify: !this.state.notify}))
+     }
 
   submitForm(e){
        e.preventDefault();
@@ -44,17 +56,6 @@ class Login extends Component {
   googleSuccess(res){
       console.log(res);
       const id_token = res.getAuthResponse().id_token;
-        // let userData = {
-        //     token: res.accessToken,
-        //     tokenType: res.tokenObj.token_type,
-        //     user:{
-        //         username: res.profileObj.name,
-        //         email: res.profileObj.email,
-        //         googleId: res.profileObj.googleId,
-        //         avatar: res.profileObj.imageUrl
-        //     }
-        // }
-
        this.props.googleLogin(id_token)
         .then(() =>{
             localStorage.setItem('userdata', JSON.stringify(this.props.login))
@@ -81,9 +82,16 @@ class Login extends Component {
     }
 
     render() {
+        const notificationClasses = classNames({
+            'notification': true,
+            'notification--showed': this.state.notify
+        })
         return (
             <div className='auth-container'>
                 <h2>Login</h2>
+                <div className={notificationClasses}>
+                    Login or password is invalid. Please, try again
+                </div>
                 <form onSubmit={this.submitForm}>
                     <ValidateGroup>
                         <Validate validators={[validation.isNotEmpty]}>

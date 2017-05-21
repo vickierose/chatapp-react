@@ -10,10 +10,9 @@ export {
 };
 
 function loginUser(credentials) {
- 
   return dispatch => {
-     return post('http://localhost:3000/auth/login', credentials).then(response => {
-       return response.json()
+     return post('http://localhost:3000/auth/login', credentials)
+     .then(response => {return response.json()})
        .then(user => {
          return dispatch({
            type: LOGIN,
@@ -22,8 +21,7 @@ function loginUser(credentials) {
            }
          });
        })
-       .catch(err => console.log(err));
-     });
+      .catch(err => console.log(err));
     };
 }
 

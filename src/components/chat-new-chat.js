@@ -24,8 +24,11 @@ class CreateNewChat extends Component {
     selectUser(e){
         debugger;
         e.target.classList.toggle('user-selection-btn--checked');
+        console.log(e.target.parentNode);
+        const userId = e.target.parentNode.value;
+        console.log(userId)
         if(e.target.classList.contains('user-selection-btn--checked')){
-            this.tempSelectedUsers.push('a')
+            this.tempSelectedUsers.push(e.target.parentNode.value)
             console.log(this.tempSelectedUsers);
         }
     }
@@ -44,7 +47,7 @@ class CreateNewChat extends Component {
             }
         }
         return userlist.map(user => (
-            <li className="new-chat-user" key={user._id}>
+            <li className="new-chat-user" key={user._id} value={user._id}>
                 <div className="photo">{avatar(user)}</div>
                 <span className="new-chat-user__info">{user.username}</span>
                 <button type="button" className="user-selection-btn" onClick={this.selectUser}>

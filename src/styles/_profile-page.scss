@@ -4,6 +4,9 @@
     * {
         display: block;
     }
+    h2 {
+        margin-top: 1.5rem;
+    }
 
     form{
         @include display-flex (column);
@@ -37,8 +40,7 @@
         img {
             border-radius: 50%;
             height: 100%;
-            width: 100%;
-             
+            width: 100%;   
         }
     }
 
@@ -91,3 +93,16 @@
         }
     }
 }
+.notification {
+        background-color: $notification-bg;
+        border-radius: 3rem;
+        color: $main-text-white;
+        display: none;
+        margin: .5rem auto;
+        padding: .5rem;
+        text-align: center;
+        width: 50%;
+        &--showed {
+          display: block;
+        }
+  }

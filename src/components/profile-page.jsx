@@ -6,6 +6,8 @@ import {updateProfile} from '../actions/login';
 import {handleInputChange} from '../utils/utils';
 import {put, getRequest} from '../utils/fetch';
 
+const classNames = require('classnames');
+
  class ProfilePage extends Component {
      constructor(...args){
         super(...args);
@@ -14,9 +16,14 @@ import {put, getRequest} from '../utils/fetch';
             status: this.props.login.user ? this.props.login.user.status: 'no status',
             email: this.props.login.user ? this.props.login.user.email : '',
             avatar: "",
+            notify: false,
         };
         this.handleInputChange=handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.toggleNotification = this.toggleNotification.bind(this);
+     }
+     toggleNotification(){
+         this.setState(state => ({notify: !this.state.notify}))
      }
 
      handleSubmit(e){
@@ -30,8 +37,11 @@ import {put, getRequest} from '../utils/fetch';
         dataToSend.append('email', this.state.email)
 
         this.props.updateProfile({url: url, cred: dataToSend})
+        .then(() =>{
+            this.toggleNotification()
+            setTimeout(this.toggleNotification, 3000)
+        })
         e.preventDefault();
-        alert('Changes Saved!');
      }
 
      get avatarPath(){
@@ -60,10 +70,14 @@ import {put, getRequest} from '../utils/fetch';
     }
 
     render() {
+        const notificationClasses = classNames({
+            'notification': true,
+            'notification--showed': this.state.notify
+        })
         return (
             <div className='profile-page'>
                 <h2>Profile</h2>
-                
+                <div className={notificationClasses}>Your changes successfully saved</div>
                 <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
                     <div className='profile-pic'>
                         {this.profilePic}

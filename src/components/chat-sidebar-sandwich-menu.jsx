@@ -10,6 +10,7 @@ class ChatSidebarSandwichMenu extends Component {
 
     showNewChatPage(e){
             this.props.changePage('createNewChat');
+            this.props.hider();
         }
 
     render() {
@@ -22,9 +23,8 @@ class ChatSidebarSandwichMenu extends Component {
             <nav className={menuClasses}>
                 <ul>
                     <li><a onClick={this.showNewChatPage}>New Chat</a></li>
-                    <li><a href="#">smthng1</a></li>
-                    <li><a href="#">smthng2</a></li>
-                    <li><a href="#">smthng3</a></li>
+                    <li><a>Show users</a></li>
+                    <li><a>Show chat rooms</a></li>
                 </ul>
             </nav>
         );

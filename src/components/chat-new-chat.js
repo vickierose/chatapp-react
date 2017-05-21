@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 const classNames = require('classnames');
 
 class CreateNewChat extends Component {
@@ -12,6 +14,7 @@ class CreateNewChat extends Component {
         this.createNewChat = this.createNewChat.bind(this);
         this.showUserPicker = this.showUserPicker.bind(this);
         this.selectUser = this.selectUser.bind(this);
+        this.showChat = this.showChat.bind(this);
     }
 
     showUserPicker(){
@@ -25,6 +28,31 @@ class CreateNewChat extends Component {
             this.tempSelectedUsers.push('a')
             console.log(this.tempSelectedUsers);
         }
+    }
+
+    get userlist(){
+        const {userlist} = this.props;
+
+         const avatar = (user) => {
+            const nameFirstSym = user.username.charAt(0).toUpperCase();
+            if(user.avatar){
+                return (
+                    <img src={user.avatar} />
+                )
+            }else {
+                return nameFirstSym
+            }
+        }
+        return userlist.map(user => (
+            <li className="new-chat-user" key={user._id}>
+                <div className="photo">{avatar(user)}</div>
+                <span className="new-chat-user__info">{user.username}</span>
+                <button type="button" className="user-selection-btn" onClick={this.selectUser}>
+                        &#10003;
+                </button>
+            </li>
+        )
+        )
     }
 
     showChat(e){
@@ -45,6 +73,7 @@ class CreateNewChat extends Component {
 
         return (
             <div className='new-chat-form'>
+                <span onClick={this.showChat}>&#8592; Back</span>
                 <h3>Create new chat</h3>
                 <form onSubmit={this.createNewChat}>
                     <input type="text"
@@ -59,27 +88,7 @@ class CreateNewChat extends Component {
                             placeholder="Search user"/>
 
                         <ul className="userlist">
-                            <li className="new-chat-user">
-                                <div className="photo"></div>
-                                <span className="new-chat-user__info">User1</span>
-                                <button type="button" className="user-selection-btn" onClick={this.selectUser}>
-                                        &#10003;
-                                </button>
-                            </li>
-                            <li className="new-chat-user">
-                                <div className="photo"></div>
-                                <span className="new-chat-user__info">User2</span>
-                                <button type="button" className="user-selection-btn" onClick={this.selectUser}>
-                                        &#10003;
-                                </button>
-                            </li>
-                            <li className="new-chat-user">
-                                <div className="photo"></div>
-                                <span className="new-chat-user__info">User3</span>
-                                <button type="button" className="user-selection-btn" onClick={this.selectUser}>
-                                        &#10003;
-                                </button>
-                            </li>
+                            {this.userlist}
                         </ul>
                     </div>
 
@@ -90,4 +99,5 @@ class CreateNewChat extends Component {
     }
 }
 
-export default CreateNewChat;
+const mapStateToProps = ({login, userlist}) => ({login, userlist});
+export default connect(mapStateToProps, null)(CreateNewChat);

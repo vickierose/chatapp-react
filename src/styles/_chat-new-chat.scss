@@ -1,9 +1,19 @@
 @import './mixins';
 .new-chat-form{
     flex-grow: 1;
+    &>span {
+        color: lightgray;
+        display: block;
+        margin: .5rem;
+        &:hover{
+            color: $hover-bg;
+        }
+    }
+
     h3 {
         margin-top: 1rem;
     }
+
     form {
         @include display-flex(column);
         margin: 1rem;

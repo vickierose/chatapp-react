@@ -11,7 +11,7 @@ import {put, getRequest} from '../utils/fetch';
         super(...args);
         this.state = {
             username: this.props.login.user ? this.props.login.user.username : '',
-            status: this.props.login.user ? this.props.login.user.status: '',
+            status: this.props.login.user ? this.props.login.user.status: 'no status',
             email: this.props.login.user ? this.props.login.user.email : '',
             avatar: "",
         };

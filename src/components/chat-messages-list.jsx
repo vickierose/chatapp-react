@@ -24,7 +24,9 @@ export class ChatMessagesList extends Component {
     get chat() {
     const { chat } = this.props;
     return chat.map(message =>(
-                    <ChatMessage message={message} key={message.time}/>
+                    <ChatMessage currentUser={this.props.login.user}
+                                 message={message}
+                                 key={message.time}/>
                 ))
   }
 

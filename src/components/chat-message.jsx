@@ -33,11 +33,16 @@ class ChatMessage extends Component {
 
      get avatar (){
         const nameFirstSym = this.props.message.user.username.charAt(0).toUpperCase();
-        if(this.props.message.user.avatar &&  typeof(this.props.message.user.avatar) !== 'object'){
+        if(this.props.message.user.avatar){
             return (
                  <img src={this.props.message.user.avatar} />
             )
-        }else {
+        }else if(!this.props.message.user.avatar 
+                && this.props.message.user.username === this.props.currentUser.username){
+                    return(
+                            <img src={this.props.currentUser.avatar} />
+                    )
+        }else{
             return nameFirstSym
         }
     }

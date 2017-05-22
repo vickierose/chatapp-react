@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack -p",
+    "postinstall": "echo postinstall time;webpack -p",
+    "start": "node server.js",
+    "dev": "webpack-dev-server",
     "test": "mocha testSetup.js src/**/*.spec.js",
     "tdd": "npm test -- -w"
   },
@@ -14,6 +15,7 @@
   "dependencies": {
     "babel-preset-airbnb": "^2.2.3",
     "classnames": "^2.2.5",
+    "express": "^4.15.3",
     "fbemitter": "^2.0.2",
     "moment": "^2.18.1",
     "react": "^15.4.2",

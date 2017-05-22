@@ -7,19 +7,9 @@ import {store} from '../app';
 
 const classNames = require('classnames');
 
-
-// function updateOnline(){
-//     mystore.isOnline = navigator.onLine;
-// }
-// window.addEventListener('online',  updateOnline);
-// window.addEventListener('offline', updateOnline);
-
 class MainHeader extends Component {
     constructor(...args){
         super(...args);
-        // this.state = {
-        //     isOnline: condition
-        // }
         this.logOut = this.logOut.bind(this);
     }
 
@@ -32,6 +22,7 @@ class MainHeader extends Component {
         clearMessages();
         clearUsers();
         localStorage.removeItem('userdata');
+        window.location.reload();
         this.props.push('/');
     }
     
@@ -62,15 +53,10 @@ class MainHeader extends Component {
     }
 
     render() {
-        // const indication = classNames({
-        //     indicator: true,
-        //     online: this.state.isOnline
-        // })
         return (
             <header className='main-header'>
                 <p className='logo'>ChatterBox
                     <Indicator />
-                    {/*<span className={indication}>Offline</span>*/}
                 </p>
                 <nav>
                     {this.links}

@@ -100,8 +100,9 @@ a {
     color: $main-text-white;
 		height: 45px;
     line-height: 45px;
-		width: 45px;
+    min-width: 45px;
     text-align: center;
+		width: 45px;
     img {
       border-radius: 50%;
       height: 100%;

@@ -12,6 +12,14 @@ export class ChatSidebarListItem extends Component {
         }
     }
 
+    get status(){
+        if(this.props.user.status === 'undefined'){
+            return '';
+        }else{
+            return this.props.user.status
+        }
+    }
+
     render() {
         return (
             <li className='chat-sidebar-list-item'>
@@ -20,7 +28,7 @@ export class ChatSidebarListItem extends Component {
                 </div>
                 <div className='chat-info'>
                     <p className='chat-name'>{this.props.user.username}</p>
-                    <p>{this.props.user.status || ""}</p>
+                    <p>{this.status}</p>
                 </div>
                 <div className='timer'></div>
             </li>

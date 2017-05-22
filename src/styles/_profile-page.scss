@@ -92,8 +92,8 @@
             background-color: $disabled-button-violet;
         }
     }
-}
-.notification {
+
+    .notification {
         background-color: $notification-bg;
         border-radius: 3rem;
         color: $main-text-white;
@@ -105,4 +105,5 @@
         &--showed {
           display: block;
         }
-  }
+    }
+}

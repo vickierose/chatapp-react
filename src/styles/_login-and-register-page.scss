@@ -23,6 +23,20 @@
             background-color: $disabled-button-violet;
         }
 	}
+
+    .notification {
+        background-color: $login-notification-bg;
+        border-radius: 3rem;
+        color: $main-text-white;
+        display: none;
+        margin: .5rem auto;
+        padding: .5rem;
+        text-align: center;
+        width: 50%;
+        &--showed {
+          display: block;
+        }
+    }
 }
 
 .social-button {
@@ -44,25 +58,7 @@
 
 .error-message {
         color: $error-text-pink;
-//         display: none;
         font-size: .7rem;
         margin-top: .5em;
         text-align: end;
     }
-//  .hidden-error {
-//             display: none;
-//         }
-
-.notification {
-        background-color: $notification-bg;
-        border-radius: 3rem;
-        color: $main-text-white;
-        display: none;
-        margin: .5rem auto;
-        padding: .5rem;
-        text-align: center;
-        width: 50%;
-        &--showed {
-          display: block;
-        }
-  }

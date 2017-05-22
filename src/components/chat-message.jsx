@@ -38,7 +38,8 @@ class ChatMessage extends Component {
                  <img src={this.props.message.user.avatar} />
             )
         }else if(!this.props.message.user.avatar 
-                && this.props.message.user.username === this.props.currentUser.username){
+                && this.props.message.user.username === this.props.currentUser.username
+                && this.props.currentUser.avatar){
                     return(
                             <img src={this.props.currentUser.avatar} />
                     )

@@ -25,6 +25,14 @@ export class ChatSidebarList extends Component {
         }
     }
 
+    get scrollHeight(){
+        if(document.documentElement.clientWidth <= 600){
+            return document.documentElement.clientHeight - 193
+        }else{
+            return document.documentElement.clientHeight - 130
+        }
+    }
+
     get userlist(){
         const userlist = this.filterUsers(this.props.filterValue);
         return userlist.map((user, i) =>(
@@ -34,7 +42,7 @@ export class ChatSidebarList extends Component {
 
     render() {
         return (
-            <Scrollbars style={{height: 'calc(100vh - 130px)'}}>
+            <Scrollbars style={{height: this.scrollHeight}}>
                 <ul className='chat-sidebar-list'>
                     {this.userlist}
                 </ul>

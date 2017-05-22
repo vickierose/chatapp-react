@@ -13,6 +13,14 @@ export class ChatMessagesList extends Component {
         this.refs.scrollbars.scrollToBottom()
     }
 
+    get scrollHeight(){
+        if(document.documentElement.clientWidth <= 600){
+            return document.documentElement.clientHeight - 213
+        }else{
+            return document.documentElement.clientHeight - 143
+        }
+    }
+
     componentDidMount() {
         this.scrollToBottom();
     }
@@ -31,8 +39,9 @@ export class ChatMessagesList extends Component {
   }
 
     render() {
+        //  const height = document.documentElement.clientHeight - 80;
         return (
-            <Scrollbars style={{height: 'calc(100vh - 143px)'}} ref='scrollbars'>
+            <Scrollbars style={{height: this.scrollHeight}} ref='scrollbars'>
                 <ul className='chat-messages-list'>
                     {this.chat}
                 </ul>

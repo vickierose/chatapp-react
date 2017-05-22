@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import {updateProfile} from '../actions/login';
 import {handleInputChange} from '../utils/utils';
 import {put, getRequest} from '../utils/fetch';
+import {apiUrl} from '../api-config';
 
 const classNames = require('classnames');
 
@@ -28,7 +29,7 @@ const classNames = require('classnames');
 
      handleSubmit(e){
         const id = this.props.login.user._id;
-        const url = `http://localhost:3000/users/${this.props.login.user._id}`
+        const url = `${apiUrl}/users/${this.props.login.user._id}`
         const dataToSend = new FormData();
 
         dataToSend.append('avatar', this.avatar.files[0])

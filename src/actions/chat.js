@@ -1,5 +1,6 @@
 import {SEND_MESSAGE, JOIN_CHAT, LEAVE_CHAT, GET_MESSAGES, CLEAR_MESSAGES} from '../constants/chat';
 import {getRequest} from '../utils/fetch';
+import {apiUrl} from '../api-config';
 
 export {
   sendMessage,
@@ -42,7 +43,7 @@ function leaveChat(userdata) {
 }
 
 function getMessages(){
-  return dispatch => getRequest('http://localhost:3000/chat')
+  return dispatch => getRequest(apiUrl + '/chat')
    .then(res => res.json())
    .then(messages =>{
      return dispatch({

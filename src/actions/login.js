@@ -1,5 +1,6 @@
 import { LOGIN, LOGOUT, LOGIN_WITH_TOKEN, UPDATE_PROFILE, GOOGLE_LOGIN } from '../constants/login';
 import { post, put, getRequest } from '../utils/fetch';
+import {apiUrl} from '../api-config';
 
 export {
   loginUser,
@@ -11,7 +12,7 @@ export {
 
 function loginUser(credentials) {
   return dispatch => {
-     return post('http://localhost:3000/auth/login', credentials)
+     return post(apiUrl + '/auth/login', credentials)
      .then(response => {return response.json()})
        .then(user => {
          return dispatch({
@@ -33,7 +34,7 @@ function logoutUser() {
 
 function googleLogin(id_token){
   return dispatch => {
-    return post('http://localhost:3000/auth/google', {id_token})
+    return post(apiUrl + '/auth/google', {id_token})
       .then(res => res.json())
       .then(user =>{
         return dispatch({
@@ -47,7 +48,7 @@ function googleLogin(id_token){
 function loginWithToken(userdata) {
     const lSData = JSON.parse(userdata);
   return dispatch => {
-    return getRequest('http://localhost:3000/users/'
+    return getRequest(apiUrl + '/users/'
           +lSData.user._id)
     .then(res => res.json())
     .then(user =>{

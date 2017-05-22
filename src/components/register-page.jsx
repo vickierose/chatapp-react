@@ -10,6 +10,7 @@ import {loginUser} from '../actions/login';
 // import * as chatActions from '../actions/chat';
 import {getMessages} from '../actions/chat';
 import {getUsers} from '../actions/userlist';
+import {apiUrl} from '../api-config';
 
 class RegisterPage extends Component {
     constructor(props){
@@ -44,7 +45,7 @@ class RegisterPage extends Component {
 
         };
 
-        fetch('http://localhost:3000/auth/signup', myInit)
+        fetch(apiUrl + '/auth/signup', myInit)
         .then(() => 
             this.props.loginUser({username: this.state.newUserLogin,
                                 password: this.state.newUserPassword})

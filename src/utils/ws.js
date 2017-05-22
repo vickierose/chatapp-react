@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import {apiUrl} from '../api-config';
 
 export {
   sendMessage,
@@ -20,7 +21,7 @@ function initConnection(message) {
 }
 
 function connect() {
-  socket = io.connect('http://localhost:3000');
+  socket = io.connect(apiUrl);
   socket.on('connect', () => {
             socket.emit('authenticate', { token: JSON.parse(localStorage['userdata']).token})
             

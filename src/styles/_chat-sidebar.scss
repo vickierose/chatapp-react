@@ -12,6 +12,10 @@
 
 	@media screen and (max-width: 600px) {
 		width: 100vw;
+
+		.chat-sidebar>div{
+			height: calc(100vh-193px);
+		}
 	}
 
 	@media screen and (min-width: 601px) and (max-width:800px) {

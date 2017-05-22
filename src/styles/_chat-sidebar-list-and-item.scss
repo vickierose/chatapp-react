@@ -2,6 +2,9 @@
 
 .chat-sidebar-list {
 		overflow-x: hidden;
+		// @media screen and (max-width: 600px) {
+		// height: calc(100vh-193px);
+		// }
 }
 
 .chat-sidebar-list-item {

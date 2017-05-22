@@ -6,9 +6,7 @@
     background-color: $header-bg-violet;
     color: $main-text-white;
     padding: .75rem;
-    @media screen and (max-width: 600px) {
-        display: block;
-    }
+
      .logo {
         font-size: 1.5rem;
         margin-right: 1rem;
@@ -33,13 +31,28 @@
     ul {
         @include display-flex(row);
          justify-content: space-between;
+
+         @media screen and (max-width:600px) {
+            display: block;
+            margin-left: calc(50% - 170px);
+        }
     }
 
     li {
         color: $main-text-white;
         margin-right: 1rem;
+
+        @media screen and (max-width:600px) {
+            margin-bottom: .25rem;
+            text-align: end;
+        }
+
         &:last-child {
-            margin-right: 0; 
+            margin-right: 0;
+            @media screen and (max-width:600px) {
+                margin-bottom: 0;
+                margin-right: 1rem;
+            } 
         }
         &:hover {
             color: $header-hover-a-text;

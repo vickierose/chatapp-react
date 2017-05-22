@@ -1,16 +1,12 @@
-const express = require('express');
-const app = express();
+var express = require('express');
+var app = express();
 
-const port = process.env.PORT || 4200;
+var port = process.env.PORT || 4200;
 
-app.use('*', function (req, res, next) {
-  next();
-});
+app.use(express.static(__dirname));
 
-app.use(express.static(__dirname + '/dist'));
-
-app.get('*', function(req, res, next) {
-   res.sendfile('./index.html');
+app.get('*', function(request, response){
+  response.sendfile('./index.html');
 });
 
 app.listen(port, function() {

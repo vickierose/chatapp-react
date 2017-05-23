@@ -18,8 +18,8 @@ class Login extends Component {
     this.handleInputChange = handleInputChange.bind(this);
     this.logIn = this.logIn.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    this.googleSuccess = this.googleSuccess.bind(this);
-    this.googleFail = this.googleFail.bind(this);
+    // this.googleSuccess = this.googleSuccess.bind(this);
+    // this.googleFail = this.googleFail.bind(this);
     this.showNotification = this.showNotification.bind(this);
   }
   
@@ -53,21 +53,21 @@ class Login extends Component {
        this.logIn();
   }
 
-  googleSuccess(res){
-      console.log(res);
-      const id_token = res.getAuthResponse().id_token;
-       this.props.googleLogin(id_token)
-        .then(() =>{
-            localStorage.setItem('userdata', JSON.stringify(this.props.login))
-        })
-        .then(() =>{this.props.push('/chat')})
-        .then(() => {this.props.getUsers()})
-        .then(() => {this.props.getMessages()})
-  }
+//   googleSuccess(res){
+//       console.log(res);
+//       const id_token = res.getAuthResponse().id_token;
+//        this.props.googleLogin(id_token)
+//         .then(() =>{
+//             localStorage.setItem('userdata', JSON.stringify(this.props.login))
+//         })
+//         .then(() =>{this.props.push('/chat')})
+//         .then(() => {this.props.getUsers()})
+//         .then(() => {this.props.getMessages()})
+//   }
 
-  googleFail(err){
-      console.log(err)
-  }
+//   googleFail(err){
+//       console.log(err)
+//   }
 
     componentWillMount() {
         if(this.props.login.user){
@@ -113,13 +113,13 @@ class Login extends Component {
                     </ValidateGroup>
                 </form>
 
-                <GoogleLogin
+                {/*<GoogleLogin
                         clientId="886894346654-eekbgqs2hps8v1tlj96u3m822f6gqmmb.apps.googleusercontent.com"
                         buttonText="Login with Google"
                         onSuccess={this.googleSuccess}
                         onFailure={this.googleFail}
                         className="social-button"
-                        disabled={this.state.username || this.state.password}/>
+                        disabled={this.state.username || this.state.password}/>*/}
             </div>
         );
     }

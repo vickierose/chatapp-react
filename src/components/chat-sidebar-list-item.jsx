@@ -30,7 +30,7 @@ export class ChatSidebarListItem extends Component {
                     <p className='chat-name'>{this.props.user.username}</p>
                     <p>{this.status}</p>
                 </div>
-                <div className='timer'></div>
+                {/*<div className='timer'></div>*/}
             </li>
         );
     }
